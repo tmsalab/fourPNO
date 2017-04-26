@@ -70,7 +70,7 @@ Sigma_xi_inv = solve(2*matrix(c(1,0,0,1),2,2))
 burnin = 1000
 #Execute Gibbs sampler
 out_t <- Gibbs_4PNO(Y_t,mu_xi,Sigma_xi_inv,mu_theta,Sigma_theta_inv,alpha_c,beta_c,alpha_s,
-                    beta_s,burnin,rep(1,J),rep(1,J),gwg_reps=5,chain_length=1000)
+                    beta_s,burnin,rep(1,J),rep(1,J),gwg_reps=5,chain_length=burnin*2)
 
 #summarizing posterior distribution
 OUT = cbind(apply(out_t$AS[,-c(1:burnin)],1,mean),apply(out_t$BS[,-c(1:burnin)],1,mean),
