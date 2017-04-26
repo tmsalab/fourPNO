@@ -462,8 +462,8 @@ Rcpp::List Gibbs_4PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat&
   //Savinging as,bs,gs,kappas, means and vcs of theta
   arma::mat AS(J,chain_length);
   arma::mat BS(J,chain_length);
-  arma::mat GS(J,chain_length);
-  arma::mat SS(J,chain_length);
+  arma::mat GSS(J,chain_length);
+  arma::mat SSS(J,chain_length);
   arma::vec ms_thetas(chain_length);
   arma::vec SD_thetas(chain_length);
   
@@ -502,8 +502,8 @@ Rcpp::List Gibbs_4PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat&
     //Storing output for as, bs, and kappas
     AS.col(t) = as;
     BS.col(t) = bs;
-    GS.col(t) = gs;
-    SS.col(t) = ss;
+    GSS.col(t) = gs;
+    SSS.col(t) = ss;
 
  // /*
          if(t>burnin-1){
@@ -525,8 +525,8 @@ Rcpp::List Gibbs_4PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat&
                           Rcpp::Named("HistS",HistS),
                           Rcpp::Named("AS",AS),
                           Rcpp::Named("BS",BS),
-                          Rcpp::Named("GS",GS),
-                          Rcpp::Named("SS",SS),
+                          Rcpp::Named("GS",GSS),
+                          Rcpp::Named("SS",SSS),
                           Rcpp::Named("ms_thetas",ms_thetas),
                           Rcpp::Named("SD_thetas",SD_thetas),
                           Rcpp::Named("Ds",deviance)

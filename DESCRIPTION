@@ -1,11 +1,10 @@
 Package: fourPNO
 Type: Package
 Title: Bayesian 4 Parameter Item Response Model
-Version: 1.0.1
-Date: 2015-10-11
-Authors@R: c(person("Steven Andrew", "Culpepper", role = c("aut", "cph","cre"), email =
+Version: 1.0.2
+Date: 2015-11-12
+Authors@R: c(person("Steven Andrew", "Culpepper", role = c("aut","cre"), email =
     "sculpepp@illinois.edu"))
-Maintainer: Steven Andrew Culpepper <sculpepp@illinois.edu>
 Description: Estimate Lord & Barton's four parameter IRT model with lower and upper asymptotes using Bayesian formulation described by Culpepper (2015).
 License: GPL (>= 2)
 Imports: Rcpp
