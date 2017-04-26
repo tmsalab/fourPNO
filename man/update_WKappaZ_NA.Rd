@@ -4,7 +4,7 @@
 \alias{update_WKappaZ_NA}
 \title{Update Lower and Upper Asymptote Parameters of 4PNO}
 \usage{
-update_WKappaZ_NA(Y, Ysum, Z, as, bs, cs, ss, theta, Kaps, alpha_c, beta_c,
+update_WKappaZ_NA(Y, Ysum, Z, as, bs, gs, ss, theta, Kaps, alpha_c, beta_c,
   alpha_s, beta_s, gwg_reps)
 }
 \arguments{
@@ -18,7 +18,7 @@ update_WKappaZ_NA(Y, Ysum, Z, as, bs, cs, ss, theta, Kaps, alpha_c, beta_c,
 
 \item{bs}{A \code{vector} of item threshold parameters.}
 
-\item{cs}{A \code{vector} of item lower asymptote parameters.}
+\item{gs}{A \code{vector} of item lower asymptote parameters.}
 
 \item{ss}{A \code{vector} of item upper asymptote parameters.}
 

@@ -213,7 +213,7 @@ Rcpp::List update_ab_norestriction(unsigned int N,unsigned int J,const arma::mat
 //' @param Z A \code{matrix} N by J of continuous augmented data.
 //' @param as A \code{vector} of item discrimination parameters.
 //' @param bs A \code{vector} of item threshold parameters.
-//' @param cs A \code{vector} of item lower asymptote parameters.
+//' @param gs A \code{vector} of item lower asymptote parameters.
 //' @param ss A \code{vector} of item upper asymptote parameters.
 //' @param theta A \code{vector} of prior thetas.
 //' @param Kaps A \code{matrix} for item thresholds (used for internal computations).
@@ -228,7 +228,7 @@ Rcpp::List update_ab_norestriction(unsigned int N,unsigned int J,const arma::mat
 //' 
 // [[Rcpp::export]]
 Rcpp::List update_WKappaZ_NA(const arma::mat& Y,const arma::vec& Ysum,arma::mat& Z,const arma::vec& as,
-  const arma::vec& bs,const arma::vec& cs,const arma::vec& ss,const arma::vec& theta,const arma::mat& Kaps,
+  const arma::vec& bs,const arma::vec& gs,const arma::vec& ss,const arma::vec& theta,const arma::mat& Kaps,
   double alpha_c,double beta_c,double alpha_s,double beta_s,unsigned int gwg_reps){
     
   unsigned int N = Y.n_rows;
@@ -242,7 +242,7 @@ Rcpp::List update_WKappaZ_NA(const arma::mat& Y,const arma::vec& Ysum,arma::mat&
   double us,ug, uZ, u4pno;
   double Phi_eta;
   double pg_temp,ps_temp,s_temp,g_temp;
-  arma::vec cs_new=arma::zeros<arma::vec>(J);
+  arma::vec gs_new=arma::zeros<arma::vec>(J);
   arma::vec ss_new=arma::zeros<arma::vec>(J);
   double n1dot,n0dot,n01,n10;
   double ps,pg;
@@ -265,11 +265,11 @@ Rcpp::List update_WKappaZ_NA(const arma::mat& Y,const arma::vec& Ysum,arma::mat&
           u4pno = R::runif(0.0,1.0);
           Phi_eta = R::pnorm(eta(i),0.0,1.0, 1, 0);
               
-            if((1.0-ss(j))*Phi_eta/( cs(j) + (1.0-ss(j)-cs(j))*Phi_eta) > u4pno and Y(i,j)==1.0){
+            if((1.0-ss(j))*Phi_eta/( gs(j) + (1.0-ss(j)-gs(j))*Phi_eta) > u4pno and Y(i,j)==1.0){
               W(i,j) = 1.0;
             }
               
-            if(ss(j)*Phi_eta/( 1.0-cs(j) - (1.0-ss(j)-cs(j))*Phi_eta) > u4pno and Y(i,j)==0.0){
+            if(ss(j)*Phi_eta/( 1.0-gs(j) - (1.0-ss(j)-gs(j))*Phi_eta) > u4pno and Y(i,j)==0.0){
               W(i,j)=1.0;
             }
 //          sj = (1-W(i))*Y(i,j) + sj;
@@ -280,7 +280,7 @@ Rcpp::List update_WKappaZ_NA(const arma::mat& Y,const arma::vec& Ysum,arma::mat&
 //        }
       }
         
-      //update cs and ss
+      //update gs and ss
       us=R::runif(0,1);
       ug=R::runif(0,1);
 
@@ -298,17 +298,17 @@ Rcpp::List update_WKappaZ_NA(const arma::mat& Y,const arma::vec& Ysum,arma::mat&
         s_temp  = R::qbeta(R::runif(0,1)*ps_temp,n10+alpha_s,n1dot-n10+beta_s,1,0);
       }
       pg = R::pbeta(1.0-s_temp,n01+alpha_c,n0dot-n01+beta_c,1,0);
-      cs_new(j) = R::qbeta(ug*pg,n01+alpha_c,n0dot-n01+beta_c,1,0);
+      gs_new(j) = R::qbeta(ug*pg,n01+alpha_c,n0dot-n01+beta_c,1,0);
     
        //draw s conditoned upon g
-      ps = R::pbeta(1.0-cs_new(j),n10+alpha_s,n1dot-n10+beta_s,1,0);
+      ps = R::pbeta(1.0-gs_new(j),n10+alpha_s,n1dot-n10+beta_s,1,0);
       ss_new(j) = R::qbeta(us*ps,n10+alpha_s,n1dot-n10+beta_s,1,0);
 
 //      }
 
   }
   return Rcpp::List::create(Rcpp::Named("ss_new",ss_new),
-                            Rcpp::Named("cs_new",cs_new)
+                            Rcpp::Named("gs_new",gs_new)
                             );
 }
 
@@ -320,7 +320,7 @@ Rcpp::List update_WKappaZ_NA(const arma::mat& Y,const arma::vec& Ysum,arma::mat&
 //' @param Y A N by J \code{matrix} of item responses.
 //' @param as A \code{vector} of item discrimination parameters.
 //' @param bs A \code{vector} of item threshold parameters.
-//' @param cs A \code{vector} of item lower asymptote parameters.
+//' @param gs A \code{vector} of item lower asymptote parameters.
 //' @param ss A \code{vector} of item upper asymptote parameters.
 //' @param theta A \code{vector} of prior thetas.
 //' @return -2LL.
@@ -329,7 +329,7 @@ Rcpp::List update_WKappaZ_NA(const arma::mat& Y,const arma::vec& Ysum,arma::mat&
 //' 
 // [[Rcpp::export]]
 double min2LL_4pno(unsigned int N,unsigned int J,const arma::mat& Y,const arma::vec& as,
-  const arma::vec& bs,const arma::vec& cs,const arma::vec& ss,const arma::vec& theta){
+  const arma::vec& bs,const arma::vec& gs,const arma::vec& ss,const arma::vec& theta){
     
   double m2ll=0.0;
   double eta,p_eta;
@@ -341,13 +341,12 @@ double min2LL_4pno(unsigned int N,unsigned int J,const arma::mat& Y,const arma::
           p_eta = R::pnorm(eta,0.0,1.0, 1, 0);
           
           if(Y(i,j)==0.0){
-            m2ll=-2.0*log(1.0-cs(j)-(1.0-ss(j)-cs(j))*p_eta) + m2ll;
+            m2ll=-2.0*log(1.0-gs(j)-(1.0-ss(j)-gs(j))*p_eta) + m2ll;
             }
 
           if(Y(i,j)==1.0){
-            m2ll=-2.0*log(cs(j)+(1.0-ss(j)-cs(j))*p_eta)+ m2ll;
+            m2ll=-2.0*log(gs(j)+(1.0-ss(j)-gs(j))*p_eta)+ m2ll;
             }        
-//          m2ll=-2.0*(Y(i,j)*log(cs(j)+(1.0-ss(j)-cs(j))*p_eta)+(1.0-Y(i,j))*log(1.0-cs(j)-(1.0-ss(j)-cs(j))*p_eta) ) + m2ll;
       }
   }
   return m2ll;
@@ -359,7 +358,7 @@ double min2LL_4pno(unsigned int N,unsigned int J,const arma::mat& Y,const arma::
 //' @param J An \code{int}, which gives the number of items.  (> 0)
 //' @param as A \code{vector} of item discrimination parameters.
 //' @param bs A \code{vector} of item threshold parameters.
-//' @param cs A \code{vector} of item lower asymptote parameters.
+//' @param gs A \code{vector} of item lower asymptote parameters.
 //' @param ss A \code{vector} of item upper asymptote parameters.
 //' @param theta A \code{vector} of prior thetas.
 //' @return A N by J \code{matrix} of dichotomous item responses.
@@ -368,7 +367,7 @@ double min2LL_4pno(unsigned int N,unsigned int J,const arma::mat& Y,const arma::
 //' 
 // [[Rcpp::export]]
 arma::mat Y_4pno_simulate(unsigned int N,unsigned int J,const arma::vec& as,const arma::vec& bs,
-  const arma::vec& cs,const arma::vec& ss,const arma::vec& theta){
+  const arma::vec& gs,const arma::vec& ss,const arma::vec& theta){
     
   double u,eta,p_eta;
   arma::mat Ysim(N,J);
@@ -380,7 +379,7 @@ arma::mat Y_4pno_simulate(unsigned int N,unsigned int J,const arma::vec& as,cons
           eta=as(j)*theta(i) - bs(j);
           p_eta = R::pnorm(eta,0.0,1.0, 1, 0);
               
-            if(cs(j) + (1.0-ss(j)-cs(j))*p_eta > u ){
+            if(gs(j) + (1.0-ss(j)-gs(j))*p_eta > u ){
               Ysim(i,j) = 1.0;
             }
               
@@ -460,23 +459,23 @@ Rcpp::List Gibbs_4PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat&
   arma::vec Ms(J);
   Ms.fill(2.0);
 
-  //Savinging as,bs,cs,kappas, means and vcs of theta
+  //Savinging as,bs,gs,kappas, means and vcs of theta
   arma::mat AS(J,chain_length);
   arma::mat BS(J,chain_length);
-  arma::mat CS(J,chain_length);
+  arma::mat GS(J,chain_length);
   arma::mat SS(J,chain_length);
   arma::vec ms_thetas(chain_length);
   arma::vec SD_thetas(chain_length);
   
 
-//need to initialize, theta, as, bs, kappas, Z; eventually cs
-  arma::vec theta = arma::randn<arma::vec>(N);//arma::zeros<arma::vec>(N);
+//need to initialize, theta, as, bs, kappas, Z; eventually gs
+  arma::vec theta = arma::randn<arma::vec>(N);
   arma::vec oneJ = arma::ones<arma::vec>(J);
   arma::vec as = arma::ones<arma::vec>(J) + 0.5*arma::randu<arma::vec>(J);
-  arma::vec bs = arma::randn<arma::vec>(J);//arma::zeros<arma::vec>(J);
+  arma::vec bs = arma::randn<arma::vec>(J);
   arma::vec uc = arma::randu<arma::vec>(J);
-  arma::vec cs =  (oneJ-arma::sqrt(uc) ) % cTF;//arma::zeros<arma::vec>(J);
-  arma::vec ss = (arma::randu<arma::vec>(J)%(oneJ-cs) ) % sTF;//%(arma::ones<arma::vec>(J)-cs);//arma::zeros<arma::vec>(J);
+  arma::vec gs =  (oneJ-arma::sqrt(uc) ) % cTF;
+  arma::vec ss = (arma::randu<arma::vec>(J)%(oneJ-gs) ) % sTF;
   arma::mat KAPS = kappa_initialize(Ms);
   arma::mat Z = arma::zeros<arma::mat>(N,J);
 
@@ -484,11 +483,11 @@ Rcpp::List Gibbs_4PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat&
   //Start chain
   for(unsigned int t = 0; t < chain_length; t++){
     //Generate Z matrix. Note that Z will be overwritten to disk here.   
-    Rcpp::List step1Z = update_WKappaZ_NA(Y,Ysum,Z,as,bs,cs,ss,theta,KAPS,alpha_c,beta_c,alpha_s,beta_s,gwg_reps);
+    Rcpp::List step1Z = update_WKappaZ_NA(Y,Ysum,Z,as,bs,gs,ss,theta,KAPS,alpha_c,beta_c,alpha_s,beta_s,gwg_reps);
     
       //update value for ss and gs
       ss    = Rcpp::as<arma::vec>(step1Z[0]) % sTF;
-      cs    = Rcpp::as<arma::vec>(step1Z[1]) % cTF;
+      gs    = Rcpp::as<arma::vec>(step1Z[1]) % cTF;
 
     //Update a, b; as and bs should be automatically updated here by writing to disk
     Rcpp::List step2ab = update_ab_NA(N,J,Z,as,bs,theta,mu_xi,Sigma_xi_inv);
@@ -503,7 +502,7 @@ Rcpp::List Gibbs_4PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat&
     //Storing output for as, bs, and kappas
     AS.col(t) = as;
     BS.col(t) = bs;
-    CS.col(t) = cs;
+    GS.col(t) = gs;
     SS.col(t) = ss;
 
  // /*
@@ -513,10 +512,10 @@ Rcpp::List Gibbs_4PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat&
           EAPtheta  = (tmburn*EAPtheta + theta)/(tmburn + 1.0);
          
           //Compute Simulated VC matrix
-          Ysimt = Y_4pno_simulate(N,J,as,bs,cs,ss,theta);
+          Ysimt = Y_4pno_simulate(N,J,as,bs,gs,ss,theta);
           HistS.col(tmburn)=Total_Tabulate(N,J,Ysimt);
           //Compute -2LL for DIC or Bayes Factors
-          deviance(tmburn) = min2LL_4pno(N,J,Y,as,bs,cs,ss,theta);
+          deviance(tmburn) = min2LL_4pno(N,J,Y,as,bs,gs,ss,theta);
         }
         
   
@@ -526,7 +525,7 @@ Rcpp::List Gibbs_4PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat&
                           Rcpp::Named("HistS",HistS),
                           Rcpp::Named("AS",AS),
                           Rcpp::Named("BS",BS),
-                          Rcpp::Named("CS",CS),
+                          Rcpp::Named("GS",GS),
                           Rcpp::Named("SS",SS),
                           Rcpp::Named("ms_thetas",ms_thetas),
                           Rcpp::Named("SD_thetas",SD_thetas),
@@ -641,18 +640,18 @@ Rcpp::List Gibbs_2PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat&
   arma::vec Ms(J);
   Ms.fill(2.0);
 
-  //Savinging as,bs,cs,kappas, means and vcs of theta
+  //Savinging as,bs,gs,kappas, means and vcs of theta
   arma::mat AS(J,chain_length);
   arma::mat BS(J,chain_length);
   arma::vec ms_thetas(chain_length);
   arma::vec SD_thetas(chain_length);
 
-//need to initialize, theta, as, bs, kappas, Z; eventually cs
+//need to initialize, theta, as, bs, kappas, Z; eventually gs
   arma::vec theta = arma::randn<arma::vec>(N);//arma::zeros<arma::vec>(N);
   arma::vec oneJ = arma::ones<arma::vec>(J);
   arma::vec as = 0.5*arma::randu<arma::vec>(J) + arma::ones<arma::vec>(J);
   arma::vec bs = arma::randn<arma::vec>(J);
-  arma::vec cs = arma::zeros<arma::vec>(J);
+  arma::vec gs = arma::zeros<arma::vec>(J);
   arma::vec ss = arma::zeros<arma::vec>(J);
   arma::mat KAPS = kappa_initialize(Ms);
   arma::mat Z = arma::zeros<arma::mat>(N,J);
@@ -679,10 +678,10 @@ Rcpp::List Gibbs_2PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat&
           EAPtheta  = (tmburn*EAPtheta + theta)/(tmburn + 1.0);
          
           //Compute Simulated VC matrix
-          Ysimt = Y_4pno_simulate(N,J,as,bs,cs,ss,theta);
+          Ysimt = Y_4pno_simulate(N,J,as,bs,gs,ss,theta);
           HistS.col(tmburn)=Total_Tabulate(N,J,Ysimt);
           //Compute -2LL for DIC or Bayes Factors
-          deviance(tmburn) = min2LL_4pno(N,J,Y,as,bs,cs,ss,theta);
+          deviance(tmburn) = min2LL_4pno(N,J,Y,as,bs,gs,ss,theta);
         }
         
   

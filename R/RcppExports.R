@@ -88,7 +88,7 @@ update_ab_norestriction <- function(N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv)
 #' @param Z A \code{matrix} N by J of continuous augmented data.
 #' @param as A \code{vector} of item discrimination parameters.
 #' @param bs A \code{vector} of item threshold parameters.
-#' @param cs A \code{vector} of item lower asymptote parameters.
+#' @param gs A \code{vector} of item lower asymptote parameters.
 #' @param ss A \code{vector} of item upper asymptote parameters.
 #' @param theta A \code{vector} of prior thetas.
 #' @param Kaps A \code{matrix} for item thresholds (used for internal computations).
@@ -101,8 +101,8 @@ update_ab_norestriction <- function(N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv)
 #' @seealso \code{\link{Gibbs_4PNO}}
 #' @author Steven Andrew Culpepper
 #' 
-update_WKappaZ_NA <- function(Y, Ysum, Z, as, bs, cs, ss, theta, Kaps, alpha_c, beta_c, alpha_s, beta_s, gwg_reps) {
-    .Call('fourPNO_update_WKappaZ_NA', PACKAGE = 'fourPNO', Y, Ysum, Z, as, bs, cs, ss, theta, Kaps, alpha_c, beta_c, alpha_s, beta_s, gwg_reps)
+update_WKappaZ_NA <- function(Y, Ysum, Z, as, bs, gs, ss, theta, Kaps, alpha_c, beta_c, alpha_s, beta_s, gwg_reps) {
+    .Call('fourPNO_update_WKappaZ_NA', PACKAGE = 'fourPNO', Y, Ysum, Z, as, bs, gs, ss, theta, Kaps, alpha_c, beta_c, alpha_s, beta_s, gwg_reps)
 }
 
 #' @title Compute 4PNO Deviance
@@ -112,15 +112,15 @@ update_WKappaZ_NA <- function(Y, Ysum, Z, as, bs, cs, ss, theta, Kaps, alpha_c, 
 #' @param Y A N by J \code{matrix} of item responses.
 #' @param as A \code{vector} of item discrimination parameters.
 #' @param bs A \code{vector} of item threshold parameters.
-#' @param cs A \code{vector} of item lower asymptote parameters.
+#' @param gs A \code{vector} of item lower asymptote parameters.
 #' @param ss A \code{vector} of item upper asymptote parameters.
 #' @param theta A \code{vector} of prior thetas.
 #' @return -2LL.
 #' @seealso \code{\link{Gibbs_4PNO}}
 #' @author Steven Andrew Culpepper
 #' 
-min2LL_4pno <- function(N, J, Y, as, bs, cs, ss, theta) {
-    .Call('fourPNO_min2LL_4pno', PACKAGE = 'fourPNO', N, J, Y, as, bs, cs, ss, theta)
+min2LL_4pno <- function(N, J, Y, as, bs, gs, ss, theta) {
+    .Call('fourPNO_min2LL_4pno', PACKAGE = 'fourPNO', N, J, Y, as, bs, gs, ss, theta)
 }
 
 #' @title Simulate from 4PNO Model
@@ -129,15 +129,15 @@ min2LL_4pno <- function(N, J, Y, as, bs, cs, ss, theta) {
 #' @param J An \code{int}, which gives the number of items.  (> 0)
 #' @param as A \code{vector} of item discrimination parameters.
 #' @param bs A \code{vector} of item threshold parameters.
-#' @param cs A \code{vector} of item lower asymptote parameters.
+#' @param gs A \code{vector} of item lower asymptote parameters.
 #' @param ss A \code{vector} of item upper asymptote parameters.
 #' @param theta A \code{vector} of prior thetas.
 #' @return A N by J \code{matrix} of dichotomous item responses.
 #' @seealso \code{\link{Gibbs_4PNO}}
 #' @author Steven Andrew Culpepper
 #' 
-Y_4pno_simulate <- function(N, J, as, bs, cs, ss, theta) {
-    .Call('fourPNO_Y_4pno_simulate', PACKAGE = 'fourPNO', N, J, as, bs, cs, ss, theta)
+Y_4pno_simulate <- function(N, J, as, bs, gs, ss, theta) {
+    .Call('fourPNO_Y_4pno_simulate', PACKAGE = 'fourPNO', N, J, as, bs, gs, ss, theta)
 }
 
 #' @title Calculate Tabulated Total Scores 

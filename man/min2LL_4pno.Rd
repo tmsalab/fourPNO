@@ -4,7 +4,7 @@
 \alias{min2LL_4pno}
 \title{Compute 4PNO Deviance}
 \usage{
-min2LL_4pno(N, J, Y, as, bs, cs, ss, theta)
+min2LL_4pno(N, J, Y, as, bs, gs, ss, theta)
 }
 \arguments{
 \item{N}{An \code{int}, which gives the number of observations.  (> 0)}
@@ -17,7 +17,7 @@ min2LL_4pno(N, J, Y, as, bs, cs, ss, theta)
 
 \item{bs}{A \code{vector} of item threshold parameters.}
 
-\item{cs}{A \code{vector} of item lower asymptote parameters.}
+\item{gs}{A \code{vector} of item lower asymptote parameters.}
 
 \item{ss}{A \code{vector} of item upper asymptote parameters.}
 

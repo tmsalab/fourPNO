@@ -84,8 +84,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // update_WKappaZ_NA
-Rcpp::List update_WKappaZ_NA(const arma::mat& Y, const arma::vec& Ysum, arma::mat& Z, const arma::vec& as, const arma::vec& bs, const arma::vec& cs, const arma::vec& ss, const arma::vec& theta, const arma::mat& Kaps, double alpha_c, double beta_c, double alpha_s, double beta_s, unsigned int gwg_reps);
-RcppExport SEXP fourPNO_update_WKappaZ_NA(SEXP YSEXP, SEXP YsumSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP csSEXP, SEXP ssSEXP, SEXP thetaSEXP, SEXP KapsSEXP, SEXP alpha_cSEXP, SEXP beta_cSEXP, SEXP alpha_sSEXP, SEXP beta_sSEXP, SEXP gwg_repsSEXP) {
+Rcpp::List update_WKappaZ_NA(const arma::mat& Y, const arma::vec& Ysum, arma::mat& Z, const arma::vec& as, const arma::vec& bs, const arma::vec& gs, const arma::vec& ss, const arma::vec& theta, const arma::mat& Kaps, double alpha_c, double beta_c, double alpha_s, double beta_s, unsigned int gwg_reps);
+RcppExport SEXP fourPNO_update_WKappaZ_NA(SEXP YSEXP, SEXP YsumSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP gsSEXP, SEXP ssSEXP, SEXP thetaSEXP, SEXP KapsSEXP, SEXP alpha_cSEXP, SEXP beta_cSEXP, SEXP alpha_sSEXP, SEXP beta_sSEXP, SEXP gwg_repsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -94,7 +94,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat& >::type Z(ZSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type as(asSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type bs(bsSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type cs(csSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type gs(gsSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type ss(ssSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type theta(thetaSEXP);
     Rcpp::traits::input_parameter< const arma::mat& >::type Kaps(KapsSEXP);
@@ -103,13 +103,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type alpha_s(alpha_sSEXP);
     Rcpp::traits::input_parameter< double >::type beta_s(beta_sSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type gwg_reps(gwg_repsSEXP);
-    __result = Rcpp::wrap(update_WKappaZ_NA(Y, Ysum, Z, as, bs, cs, ss, theta, Kaps, alpha_c, beta_c, alpha_s, beta_s, gwg_reps));
+    __result = Rcpp::wrap(update_WKappaZ_NA(Y, Ysum, Z, as, bs, gs, ss, theta, Kaps, alpha_c, beta_c, alpha_s, beta_s, gwg_reps));
     return __result;
 END_RCPP
 }
 // min2LL_4pno
-double min2LL_4pno(unsigned int N, unsigned int J, const arma::mat& Y, const arma::vec& as, const arma::vec& bs, const arma::vec& cs, const arma::vec& ss, const arma::vec& theta);
-RcppExport SEXP fourPNO_min2LL_4pno(SEXP NSEXP, SEXP JSEXP, SEXP YSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP csSEXP, SEXP ssSEXP, SEXP thetaSEXP) {
+double min2LL_4pno(unsigned int N, unsigned int J, const arma::mat& Y, const arma::vec& as, const arma::vec& bs, const arma::vec& gs, const arma::vec& ss, const arma::vec& theta);
+RcppExport SEXP fourPNO_min2LL_4pno(SEXP NSEXP, SEXP JSEXP, SEXP YSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP gsSEXP, SEXP ssSEXP, SEXP thetaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -118,16 +118,16 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const arma::mat& >::type Y(YSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type as(asSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type bs(bsSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type cs(csSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type gs(gsSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type ss(ssSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type theta(thetaSEXP);
-    __result = Rcpp::wrap(min2LL_4pno(N, J, Y, as, bs, cs, ss, theta));
+    __result = Rcpp::wrap(min2LL_4pno(N, J, Y, as, bs, gs, ss, theta));
     return __result;
 END_RCPP
 }
 // Y_4pno_simulate
-arma::mat Y_4pno_simulate(unsigned int N, unsigned int J, const arma::vec& as, const arma::vec& bs, const arma::vec& cs, const arma::vec& ss, const arma::vec& theta);
-RcppExport SEXP fourPNO_Y_4pno_simulate(SEXP NSEXP, SEXP JSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP csSEXP, SEXP ssSEXP, SEXP thetaSEXP) {
+arma::mat Y_4pno_simulate(unsigned int N, unsigned int J, const arma::vec& as, const arma::vec& bs, const arma::vec& gs, const arma::vec& ss, const arma::vec& theta);
+RcppExport SEXP fourPNO_Y_4pno_simulate(SEXP NSEXP, SEXP JSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP gsSEXP, SEXP ssSEXP, SEXP thetaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
@@ -135,10 +135,10 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< unsigned int >::type J(JSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type as(asSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type bs(bsSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type cs(csSEXP);
+    Rcpp::traits::input_parameter< const arma::vec& >::type gs(gsSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type ss(ssSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type theta(thetaSEXP);
-    __result = Rcpp::wrap(Y_4pno_simulate(N, J, as, bs, cs, ss, theta));
+    __result = Rcpp::wrap(Y_4pno_simulate(N, J, as, bs, gs, ss, theta));
     return __result;
 END_RCPP
 }

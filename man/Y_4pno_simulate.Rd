@@ -4,7 +4,7 @@
 \alias{Y_4pno_simulate}
 \title{Simulate from 4PNO Model}
 \usage{
-Y_4pno_simulate(N, J, as, bs, cs, ss, theta)
+Y_4pno_simulate(N, J, as, bs, gs, ss, theta)
 }
 \arguments{
 \item{N}{An \code{int}, which gives the number of observations.  (> 0)}
@@ -15,7 +15,7 @@ Y_4pno_simulate(N, J, as, bs, cs, ss, theta)
 
 \item{bs}{A \code{vector} of item threshold parameters.}
 
-\item{cs}{A \code{vector} of item lower asymptote parameters.}
+\item{gs}{A \code{vector} of item lower asymptote parameters.}
 
 \item{ss}{A \code{vector} of item upper asymptote parameters.}
 

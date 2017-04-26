@@ -44,7 +44,7 @@ N = 100
     ps_g = pbeta(1-gs_t,1,8)
   ss_t = qbeta(runif(J)*ps_g,1,8)
 theta_t <- rnorm(N)
-Y_t = Y_4pno_simulate(N,J,as=as_t,bs=bs_t,cs=gs_t,ss=ss_t,theta=theta_t)
+Y_t = Y_4pno_simulate(N,J,as=as_t,bs=bs_t,gs=gs_t,ss=ss_t,theta=theta_t)
 
 #setting prior parameters
 mu_theta=0
@@ -59,9 +59,9 @@ out_t <- Gibbs_4PNO(Y_t,mu_xi,Sigma_xi_inv,mu_theta,Sigma_theta_inv,alpha_c,beta
 
 #summarizing posterior distribution
 OUT = cbind(apply(out_t$AS[,-c(1:burnin)],1,mean),apply(out_t$BS[,-c(1:burnin)],1,mean),
-            apply(out_t$CS[,-c(1:burnin)],1,mean),apply(out_t$SS[,-c(1:burnin)],1,mean),
+            apply(out_t$GS[,-c(1:burnin)],1,mean),apply(out_t$SS[,-c(1:burnin)],1,mean),
             apply(out_t$AS[,-c(1:burnin)],1,sd),apply(out_t$BS[,-c(1:burnin)],1,sd),
-            apply(out_t$CS[,-c(1:burnin)],1,sd),apply(out_t$SS[,-c(1:burnin)],1,sd) )
+            apply(out_t$GS[,-c(1:burnin)],1,sd),apply(out_t$SS[,-c(1:burnin)],1,sd) )
 OUT = cbind(1:J,OUT)
 colnames(OUT) = c('Item','as','bs','gs','ss','as_sd','bs_sd','gs_sd','ss_sd')
 print(OUT,digits=3)
