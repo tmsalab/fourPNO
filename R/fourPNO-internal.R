@@ -128,4 +128,4 @@ c(403L, 10L, -916551914L, 1672741312L, 1551819139L, 1470003105L,
 
 #' @useDynLib "fourPNO", .registration=TRUE
 #' @importFrom Rcpp evalCpp
-NULL
+"_PACKAGE"
