@@ -1,11 +1,8 @@
 #include <RcppArmadillo.h>
-#include <Rcpp.h>
-// [[Rcpp::depends(RcppArmadillo)]]
 
-using namespace Rcpp;
-
-//' @title Generate Random Multivariate Normal Distribution
-//' @description Creates a random Multivariate Normal when given number of obs, mean, and sigma. 
+//' Generate Random Multivariate Normal Distribution
+//' 
+//' Creates a random Multivariate Normal when given number of obs, mean, and sigma. 
 //' @usage rmvnorm(n, mu, sigma)
 //' @param n An \code{int}, which gives the number of observations.  (> 0)
 //' @param mu A \code{vector} length m that represents the means of the normals.
@@ -15,30 +12,31 @@ using namespace Rcpp;
 //' @examples 
 //' #Call with the following data:
 //' rmvnorm(2, c(0,0), diag(2))
-//' 
+//' @export
 // [[Rcpp::export]]
 arma::mat rmvnorm(unsigned int n, const arma::vec& mu, const arma::mat& sigma) {
    unsigned int ncols = sigma.n_cols;
-   RNGScope scope;
+   Rcpp::RNGScope scope;
    arma::mat Y(n, ncols);
    Y.imbue( norm_rand ) ;
    return arma::repmat(mu, 1, n).t() + Y * arma::chol(sigma);
 }
 
-//' @title Initialize Thresholds
-//' @description Internal function for initializing item thresholds.
+//' Initialize Thresholds
+//' 
+//' Internal function for initializing item thresholds.
 //' @param Ms A \code{vector} with the number of scale values. 
 //' @return A \code{matrix} that is a Multivariate Normal distribution
 //' @seealso \code{\link{Gibbs_4PNO}}
 //' @author Steven Andrew Culpepper
-//' 
+//' @export
 // [[Rcpp::export]]
 arma::mat kappa_initialize(const arma::vec& Ms){
   unsigned int J = Ms.n_elem;
   unsigned int M = max(Ms);
   arma::mat KAP0(M+1,J);
   
-  (KAP0.row(0)).fill(-arma::math::inf());
+  (KAP0.row(0)).fill(-arma::datum::inf);
   KAP0.row(1).fill(0.0);
 
   for(unsigned int j=0;j<J;j++){
@@ -49,11 +47,11 @@ arma::mat kappa_initialize(const arma::vec& Ms){
       }
       
       if(m==Ms(j)){
-        KAP0(m,j)=arma::math::inf();
+        KAP0(m,j)=arma::datum::inf;
       }
 
       if(m>Ms(j)){
-        KAP0(m,j)=arma::math::nan();
+        KAP0(m,j)=arma::datum::nan;
       }
 
     }  
@@ -63,8 +61,9 @@ arma::mat kappa_initialize(const arma::vec& Ms){
   return KAP0;
 }
 
-//' @title Internal Function for Updating Theta in Gibbs Sampler
-//' @description Update theta in Gibbs sampler
+//' Internal Function for Updating Theta in Gibbs Sampler
+//' 
+//' Update theta in Gibbs sampler
 //' @param N An \code{int}, which gives the number of observations.  (> 0)
 //' @param Z A \code{matrix} N by J of continuous augmented data.
 //' @param as A \code{vector} of item discrimination parameters.
@@ -75,7 +74,7 @@ arma::mat kappa_initialize(const arma::vec& Ms){
 //' @return A \code{vector} of thetas.
 //' @seealso \code{\link{Gibbs_4PNO}}
 //' @author Steven Andrew Culpepper
-//' 
+//' @export
 // [[Rcpp::export]]
 Rcpp::List update_theta(unsigned int N,const arma::mat& Z,const arma::vec& as,const arma::vec& bs,
   arma::vec& theta,const double& mu_theta,const double& Sigma_theta_inv) {
@@ -100,8 +99,9 @@ return Rcpp::List::create(//Rcpp::Named("theta",theta),
 
 
 
-//' @title Update a and b Parameters of 2PNO, 3PNO, 4PNO
-//' @description Update item slope and threshold
+//' Update a and b Parameters of 2PNO, 3PNO, 4PNO
+//' 
+//' Update item slope and threshold
 //' @param N An \code{int}, which gives the number of observations.  (> 0)
 //' @param J An \code{int}, which gives the number of items.  (> 0)
 //' @param Z A \code{matrix} N by J of continuous augmented data.
@@ -113,7 +113,7 @@ return Rcpp::List::create(//Rcpp::Named("theta",theta),
 //' @return A list of item parameters.
 //' @seealso \code{\link{Gibbs_4PNO}}
 //' @author Steven Andrew Culpepper
-//' 
+//' @export
 // [[Rcpp::export]]
 Rcpp::List update_ab_NA(unsigned int N,unsigned int J,const arma::mat& Z,arma::vec& as,arma::vec& bs,
   const arma::vec& theta,const arma::vec& mu_xi,const arma::mat& Sigma_xi_inv) {
@@ -160,8 +160,9 @@ Rcpp::List update_ab_NA(unsigned int N,unsigned int J,const arma::mat& Z,arma::v
 
 
 
-//' @title Update a and b Parameters of 4pno without alpha > 0 Restriction
-//' @description Update item slope and threshold
+//' Update a and b Parameters of 4pno without alpha > 0 Restriction
+//' 
+//' Update item slope and threshold
 //' @param N An \code{int}, which gives the number of observations.  (> 0)
 //' @param J An \code{int}, which gives the number of items.  (> 0)
 //' @param Z A \code{matrix} N by J of continuous augmented data.
@@ -173,7 +174,7 @@ Rcpp::List update_ab_NA(unsigned int N,unsigned int J,const arma::mat& Z,arma::v
 //' @return A list of item parameters.
 //' @seealso \code{\link{Gibbs_4PNO}}
 //' @author Steven Andrew Culpepper
-//' 
+//' @export
 // [[Rcpp::export]]
 Rcpp::List update_ab_norestriction(unsigned int N,unsigned int J,const arma::mat& Z,arma::vec& as,arma::vec& bs,
   const arma::vec& theta,const arma::vec& mu_xi,const arma::mat& Sigma_xi_inv) {
@@ -206,8 +207,9 @@ Rcpp::List update_ab_norestriction(unsigned int N,unsigned int J,const arma::mat
                             );
 }
 
-//' @title Update Lower and Upper Asymptote Parameters of 4PNO
-//' @description Internal function to update item lower and upper asymptote
+//' Update Lower and Upper Asymptote Parameters of 4PNO
+//' 
+//' Internal function to update item lower and upper asymptote
 //' @param Y A N by J \code{matrix} of item responses.
 //' @param Ysum A \code{vector} of item total scores.
 //' @param Z A \code{matrix} N by J of continuous augmented data.
@@ -225,7 +227,7 @@ Rcpp::List update_ab_norestriction(unsigned int N,unsigned int J,const arma::mat
 //' @return A list of item threshold parameters.
 //' @seealso \code{\link{Gibbs_4PNO}}
 //' @author Steven Andrew Culpepper
-//' 
+//' @export
 // [[Rcpp::export]]
 Rcpp::List update_WKappaZ_NA(const arma::mat& Y,const arma::vec& Ysum,arma::mat& Z,const arma::vec& as,
   const arma::vec& bs,const arma::vec& gs,const arma::vec& ss,const arma::vec& theta,const arma::mat& Kaps,
@@ -313,8 +315,9 @@ Rcpp::List update_WKappaZ_NA(const arma::mat& Y,const arma::vec& Ysum,arma::mat&
 }
 
 
-//' @title Compute 4PNO Deviance
-//' @description Internal function to -2LL
+//' Compute 4PNO Deviance
+//' 
+//' Internal function to -2LL
 //' @param N An \code{int}, which gives the number of observations.  (> 0)
 //' @param J An \code{int}, which gives the number of items.  (> 0)
 //' @param Y A N by J \code{matrix} of item responses.
@@ -326,7 +329,7 @@ Rcpp::List update_WKappaZ_NA(const arma::mat& Y,const arma::vec& Ysum,arma::mat&
 //' @return -2LL.
 //' @seealso \code{\link{Gibbs_4PNO}}
 //' @author Steven Andrew Culpepper
-//' 
+//' @export
 // [[Rcpp::export]]
 double min2LL_4pno(unsigned int N,unsigned int J,const arma::mat& Y,const arma::vec& as,
   const arma::vec& bs,const arma::vec& gs,const arma::vec& ss,const arma::vec& theta){
@@ -352,8 +355,9 @@ double min2LL_4pno(unsigned int N,unsigned int J,const arma::mat& Y,const arma::
   return m2ll;
 }
 
-//' @title Simulate from 4PNO Model
-//' @description Generate item responses under the 4PNO
+//' Simulate from 4PNO Model
+//' 
+//' Generate item responses under the 4PNO
 //' @param N An \code{int}, which gives the number of observations.  (> 0)
 //' @param J An \code{int}, which gives the number of items.  (> 0)
 //' @param as A \code{vector} of item discrimination parameters.
@@ -364,7 +368,7 @@ double min2LL_4pno(unsigned int N,unsigned int J,const arma::mat& Y,const arma::
 //' @return A N by J \code{matrix} of dichotomous item responses.
 //' @seealso \code{\link{Gibbs_4PNO}}
 //' @author Steven Andrew Culpepper
-//' 
+//' @export
 // [[Rcpp::export]]
 arma::mat Y_4pno_simulate(unsigned int N,unsigned int J,const arma::vec& as,const arma::vec& bs,
   const arma::vec& gs,const arma::vec& ss,const arma::vec& theta){
@@ -391,15 +395,16 @@ arma::mat Y_4pno_simulate(unsigned int N,unsigned int J,const arma::vec& as,cons
   return Ysim;
 }
 
-//' @title Calculate Tabulated Total Scores 
-//' @description Internal function to -2LL
+//' Calculate Tabulated Total Scores 
+//' 
+//' Internal function to -2LL
 //' @param N An \code{int}, which gives the number of observations.  (> 0)
 //' @param J An \code{int}, which gives the number of items.  (> 0)
 //' @param Y A N by J \code{matrix} of item responses.
 //' @return A vector of tabulated total scores.
 //' @seealso \code{\link{Gibbs_4PNO}}
 //' @author Steven Andrew Culpepper
-//' 
+//' @export
 // [[Rcpp::export]]
 arma::uvec Total_Tabulate(unsigned int N,unsigned int J,const arma::mat Y){
     
@@ -411,25 +416,65 @@ arma::uvec Total_Tabulate(unsigned int N,unsigned int J,const arma::mat Y){
   return H;
 }
 
-//' @title Gibbs Implementation of 4PNO
-//' @description Internal function to -2LL
-//' @param Y A N by J \code{matrix} of item responses.
-//' @param mu_xi A two dimensional \code{vector} of prior item parameter means.
-//' @param Sigma_xi_inv A two dimensional identity \code{matrix} of prior item parameter VC matrix.
-//' @param mu_theta The prior mean for theta.
+//' Gibbs Implementation of 4PNO
+//' 
+//' Internal function to -2LL
+//' @param Y               A N by J \code{matrix} of item responses.
+//' @param mu_xi           A two dimensional \code{vector} of prior item parameter means.
+//' @param Sigma_xi_inv    A two dimensional identity \code{matrix} of prior item parameter VC matrix.
+//' @param mu_theta        The prior mean for theta.
 //' @param Sigma_theta_inv The prior inverse variance for theta.
-//' @param alpha_c The lower asymptote prior 'a' parameter.
-//' @param beta_c The lower asymptote prior 'b' parameter.
-//' @param alpha_s The upper asymptote prior 'a' parameter.
-//' @param beta_s The upper asymptote prior 'b' parameter.
-//' @param burnin The number of MCMC samples to discard.
-//' @param cTF A J dimensional \code{vector} indicating which lower asymptotes to estimate.
-//' @param sTF A J dimensional \code{vector} indicating which upper asymptotes to estimate.
-//' @param gwg_reps The number of Gibbs within Gibbs MCMC samples for marginal distribution of gamma.
+//' @param alpha_c      The lower asymptote prior 'a' parameter.
+//' @param beta_c       The lower asymptote prior 'b' parameter.
+//' @param alpha_s      The upper asymptote prior 'a' parameter.
+//' @param beta_s       The upper asymptote prior 'b' parameter.
+//' @param burnin       The number of MCMC samples to discard.
+//' @param cTF          A J dimensional \code{vector} indicating which lower asymptotes to estimate. 0 = exclude lower asymptote and 1 = include lower asymptote.
+//' @param sTF          A J dimensional \code{vector} indicating which upper asymptotes to estimate. 0 = exclude upper asymptote and 1 = include upper asymptote.
+//' @param gwg_reps     The number of Gibbs within Gibbs MCMC samples for marginal distribution of gamma. Values between 5 to 10 are adequate.
 //' @param chain_length The number of MCMC samples.
 //' @return Samples from posterior.
 //' @author Steven Andrew Culpepper
+//' @export
+//' @examples
+//' require(fourPNO)
 //' 
+//' # Simulate small 4PNO dataset to demonstrate function
+//' J = 5
+//' N = 100
+//' 
+//' # Population item parameters
+//' as_t = rnorm(J,mean=2,sd=.5)
+//' bs_t = rnorm(J,mean=0,sd=.5)
+//' 
+//' # Sampling gs and ss with truncation
+//' gs_t = rbeta(J,1,8)
+//' ps_g = pbeta(1-gs_t,1,8)
+//' ss_t = qbeta(runif(J)*ps_g,1,8)
+//' theta_t <- rnorm(N)
+//' Y_t = Y_4pno_simulate(N,J,as=as_t,bs=bs_t,gs=gs_t,ss=ss_t,theta=theta_t)
+//'     
+//' # Setting prior parameters
+//' mu_theta=0
+//' Sigma_theta_inv=1
+//' mu_xi = c(0,0)
+//' alpha_c=alpha_s=beta_c=beta_s=1
+//' Sigma_xi_inv = solve(2*matrix(c(1,0,0,1),2,2))
+//' burnin = 1000
+//' 
+//' # Execute Gibbs sampler
+//' out_t = Gibbs_4PNO(Y_t,mu_xi,Sigma_xi_inv,mu_theta,Sigma_theta_inv,alpha_c,beta_c,alpha_s,
+//'                    beta_s,burnin,rep(1,J),rep(1,J),gwg_reps=5,chain_length=burnin*2)
+//'         
+//' # Summarizing posterior distribution
+//' OUT = cbind(apply(out_t$AS[,-c(1:burnin)],1,mean),apply(out_t$BS[,-c(1:burnin)],1,mean),
+//'             apply(out_t$GS[,-c(1:burnin)],1,mean),apply(out_t$SS[,-c(1:burnin)],1,mean),
+//'             apply(out_t$AS[,-c(1:burnin)],1,sd),apply(out_t$BS[,-c(1:burnin)],1,sd),
+//'             apply(out_t$GS[,-c(1:burnin)],1,sd),apply(out_t$SS[,-c(1:burnin)],1,sd) )
+//'             
+//' OUT = cbind(1:J,OUT)
+//' colnames(OUT) = c('Item','as','bs','gs','ss','as_sd','bs_sd','gs_sd','ss_sd')
+//' print(OUT,digits=3)
 // [[Rcpp::export]]
 Rcpp::List Gibbs_4PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat& Sigma_xi_inv,
   const double& mu_theta,const double& Sigma_theta_inv,double alpha_c,double beta_c,double alpha_s,
@@ -533,18 +578,25 @@ Rcpp::List Gibbs_4PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat&
                           );
 }
   
-//' @title Update 2PNO Model Parameters
-//' @description Internal function to update 2PNO parameters
+//' Update 2PNO Model Parameters
+//' 
+//' Internal function to update 2PNO parameters
+//' @param N The number of observations.
+//' @param J The number of items.
 //' @param Y A N by J \code{matrix} of item responses.
 //' @param Z A \code{matrix} N by J of continuous augmented data.
 //' @param as A \code{vector} of item discrimination parameters.
 //' @param bs A \code{vector} of item threshold parameters.
 //' @param theta A \code{vector} of prior thetas.
 //' @param Kaps A \code{matrix} for item thresholds (used for internal computations).
+//' @param mu_xi Prior mean for item parameters.
+//' @param Sigma_xi_inv Prior item parameter inverse variance-covariance matrix.
+//' @param mu_theta Prior mean for theta.
+//' @param Sigma_theta_inv Prior inverse variance for theta.
 //' @return A list of item parameters.
 //' @seealso \code{\link{Gibbs_4PNO}}
 //' @author Steven Andrew Culpepper
-//' 
+//' @export
 // [[Rcpp::export]]
 Rcpp::List update_2pno(unsigned int N,unsigned int J,const arma::mat& Y,arma::mat& Z,const arma::vec& as,
   const arma::vec& bs,const arma::vec& theta, const arma::mat& Kaps,const arma::vec& mu_xi,
@@ -601,8 +653,9 @@ Rcpp::List update_2pno(unsigned int N,unsigned int J,const arma::mat& Y,arma::ma
                             );
 }
 
-//' @title Gibbs Implementation of 2PNO
-//' @description Implement Gibbs 2PNO Sampler
+//' Gibbs Implementation of 2PNO
+//' 
+//' Implement Gibbs 2PNO Sampler
 //' @param Y A N by J \code{matrix} of item responses.
 //' @param mu_xi A two dimensional \code{vector} of prior item parameter means.
 //' @param Sigma_xi_inv A two dimensional identity \code{matrix} of prior item parameter VC matrix.
@@ -612,7 +665,44 @@ Rcpp::List update_2pno(unsigned int N,unsigned int J,const arma::mat& Y,arma::ma
 //' @param chain_length The number of MCMC samples.
 //' @return Samples from posterior.
 //' @author Steven Andrew Culpepper
+//' @export
+//' @examples
+//' require(fourPNO)
+//' # simulate small 2PNO dataset to demonstrate function
+//' J = 5
+//' N = 100
+//'
+//' # Population item parameters
+//' as_t = rnorm(J,mean=2,sd=.5)
+//' bs_t = rnorm(J,mean=0,sd=.5)
+//'    
+//' # Sampling gs and ss with truncation
+//' gs_t = rbeta(J,1,8)
+//' ps_g = pbeta(1-gs_t,1,8)
+//' ss_t = qbeta(runif(J)*ps_g,1,8)
+//' theta_t = rnorm(N)
+//' Y_t = Y_4pno_simulate(N,J,as=as_t,bs=bs_t,gs=gs_t,ss=ss_t,theta=theta_t)
+//'    
+//' # Setting prior parameters
+//' mu_theta = 0
+//' Sigma_theta_inv = 1
+//' mu_xi = c(0,0)
+//' alpha_c = alpha_s = beta_c = beta_s = 1
+//' Sigma_xi_inv = solve(2*matrix(c(1,0,0,1), 2, 2))
+//' burnin = 1000
 //' 
+//' # Execute Gibbs sampler. This should take about 15.5 minutes
+//' out_t <- Gibbs_4PNO(Y_t,mu_xi,Sigma_xi_inv,mu_theta,Sigma_theta_inv,alpha_c,beta_c,alpha_s,
+//'                     beta_s,burnin,rep(1,J),rep(1,J),gwg_reps=5,chain_length=burnin*2)
+//'        
+//' # Summarizing posterior distribution
+//' OUT = cbind(apply(out_t$AS[,-c(1:burnin)],1,mean),apply(out_t$BS[,-c(1:burnin)],1,mean),
+//'         apply(out_t$GS[,-c(1:burnin)],1,mean),apply(out_t$SS[,-c(1:burnin)],1,mean),
+//'         apply(out_t$AS[,-c(1:burnin)],1,sd),apply(out_t$BS[,-c(1:burnin)],1,sd),
+//'         apply(out_t$GS[,-c(1:burnin)],1,sd),apply(out_t$SS[,-c(1:burnin)],1,sd) )
+//' OUT = cbind(1:J, OUT)
+//' colnames(OUT) = c('Item','as','bs','gs','ss','as_sd','bs_sd','gs_sd','ss_sd')
+//' print(OUT, digits=3)
 // [[Rcpp::export]]
 Rcpp::List Gibbs_2PNO(const arma::mat& Y,const arma::vec& mu_xi,const arma::mat& Sigma_xi_inv,
   const double& mu_theta,const double& Sigma_theta_inv,unsigned int burnin,unsigned int chain_length=10000){
