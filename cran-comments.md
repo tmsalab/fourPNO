@@ -3,6 +3,13 @@
 * ubuntu 12.04 (on travis-ci), R 3.4.0
 * win-builder (devel and release)
 
+## Feedback
+
+The previously submitted version of this package had a CRAN maintainer request
+the addition paper reference material including the year and doi of publications
+referenced within the `DESCRIPTION` file's description section.
+This was addressed. 
+
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
