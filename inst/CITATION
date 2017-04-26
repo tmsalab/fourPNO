@@ -1,0 +1,9 @@
+citHeader("To cite package fourPNO in publications use:")
+
+citEntry(entry="Article",
+    title = "Revisiting the 4-parameter item response model: Bayesian estimation and application",
+    author = c(as.person("Steven Andrew Culpepper")),
+	  journal = "Psychometrika",
+    year = {2015},
+    textVersion = "Culpepper, S. A. (2015). Revisiting the 4-parameter item response model: Bayesian estimation and application, Psychometrika. DOI: 10.1007/s11336-015-9477-6")
+

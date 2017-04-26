@@ -1,0 +1,4 @@
+useDynLib(fourPNO)
+#import(RcppArmadillo)
+importFrom("Rcpp", evalCpp)
+exportPattern("^[[:alpha:]]+")
