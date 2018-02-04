@@ -8,7 +8,7 @@ using namespace Rcpp;
 
 // rmvnorm
 arma::mat rmvnorm(unsigned int n, const arma::vec& mu, const arma::mat& sigma);
-RcppExport SEXP fourPNO_rmvnorm(SEXP nSEXP, SEXP muSEXP, SEXP sigmaSEXP) {
+RcppExport SEXP _fourPNO_rmvnorm(SEXP nSEXP, SEXP muSEXP, SEXP sigmaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -21,7 +21,7 @@ END_RCPP
 }
 // kappa_initialize
 arma::mat kappa_initialize(const arma::vec& Ms);
-RcppExport SEXP fourPNO_kappa_initialize(SEXP MsSEXP) {
+RcppExport SEXP _fourPNO_kappa_initialize(SEXP MsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -32,7 +32,7 @@ END_RCPP
 }
 // update_theta
 Rcpp::List update_theta(unsigned int N, const arma::mat& Z, const arma::vec& as, const arma::vec& bs, arma::vec& theta, const double& mu_theta, const double& Sigma_theta_inv);
-RcppExport SEXP fourPNO_update_theta(SEXP NSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP mu_thetaSEXP, SEXP Sigma_theta_invSEXP) {
+RcppExport SEXP _fourPNO_update_theta(SEXP NSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP mu_thetaSEXP, SEXP Sigma_theta_invSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -49,7 +49,7 @@ END_RCPP
 }
 // update_ab_NA
 Rcpp::List update_ab_NA(unsigned int N, unsigned int J, const arma::mat& Z, arma::vec& as, arma::vec& bs, const arma::vec& theta, const arma::vec& mu_xi, const arma::mat& Sigma_xi_inv);
-RcppExport SEXP fourPNO_update_ab_NA(SEXP NSEXP, SEXP JSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP) {
+RcppExport SEXP _fourPNO_update_ab_NA(SEXP NSEXP, SEXP JSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -67,7 +67,7 @@ END_RCPP
 }
 // update_ab_norestriction
 Rcpp::List update_ab_norestriction(unsigned int N, unsigned int J, const arma::mat& Z, arma::vec& as, arma::vec& bs, const arma::vec& theta, const arma::vec& mu_xi, const arma::mat& Sigma_xi_inv);
-RcppExport SEXP fourPNO_update_ab_norestriction(SEXP NSEXP, SEXP JSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP) {
+RcppExport SEXP _fourPNO_update_ab_norestriction(SEXP NSEXP, SEXP JSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -85,7 +85,7 @@ END_RCPP
 }
 // update_WKappaZ_NA
 Rcpp::List update_WKappaZ_NA(const arma::mat& Y, const arma::vec& Ysum, arma::mat& Z, const arma::vec& as, const arma::vec& bs, const arma::vec& gs, const arma::vec& ss, const arma::vec& theta, const arma::mat& Kaps, double alpha_c, double beta_c, double alpha_s, double beta_s, unsigned int gwg_reps);
-RcppExport SEXP fourPNO_update_WKappaZ_NA(SEXP YSEXP, SEXP YsumSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP gsSEXP, SEXP ssSEXP, SEXP thetaSEXP, SEXP KapsSEXP, SEXP alpha_cSEXP, SEXP beta_cSEXP, SEXP alpha_sSEXP, SEXP beta_sSEXP, SEXP gwg_repsSEXP) {
+RcppExport SEXP _fourPNO_update_WKappaZ_NA(SEXP YSEXP, SEXP YsumSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP gsSEXP, SEXP ssSEXP, SEXP thetaSEXP, SEXP KapsSEXP, SEXP alpha_cSEXP, SEXP beta_cSEXP, SEXP alpha_sSEXP, SEXP beta_sSEXP, SEXP gwg_repsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -109,7 +109,7 @@ END_RCPP
 }
 // min2LL_4pno
 double min2LL_4pno(unsigned int N, unsigned int J, const arma::mat& Y, const arma::vec& as, const arma::vec& bs, const arma::vec& gs, const arma::vec& ss, const arma::vec& theta);
-RcppExport SEXP fourPNO_min2LL_4pno(SEXP NSEXP, SEXP JSEXP, SEXP YSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP gsSEXP, SEXP ssSEXP, SEXP thetaSEXP) {
+RcppExport SEXP _fourPNO_min2LL_4pno(SEXP NSEXP, SEXP JSEXP, SEXP YSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP gsSEXP, SEXP ssSEXP, SEXP thetaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -127,7 +127,7 @@ END_RCPP
 }
 // Y_4pno_simulate
 arma::mat Y_4pno_simulate(unsigned int N, unsigned int J, const arma::vec& as, const arma::vec& bs, const arma::vec& gs, const arma::vec& ss, const arma::vec& theta);
-RcppExport SEXP fourPNO_Y_4pno_simulate(SEXP NSEXP, SEXP JSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP gsSEXP, SEXP ssSEXP, SEXP thetaSEXP) {
+RcppExport SEXP _fourPNO_Y_4pno_simulate(SEXP NSEXP, SEXP JSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP gsSEXP, SEXP ssSEXP, SEXP thetaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -144,7 +144,7 @@ END_RCPP
 }
 // Total_Tabulate
 arma::uvec Total_Tabulate(unsigned int N, unsigned int J, const arma::mat Y);
-RcppExport SEXP fourPNO_Total_Tabulate(SEXP NSEXP, SEXP JSEXP, SEXP YSEXP) {
+RcppExport SEXP _fourPNO_Total_Tabulate(SEXP NSEXP, SEXP JSEXP, SEXP YSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -157,7 +157,7 @@ END_RCPP
 }
 // Gibbs_4PNO
 Rcpp::List Gibbs_4PNO(const arma::mat& Y, const arma::vec& mu_xi, const arma::mat& Sigma_xi_inv, const double& mu_theta, const double& Sigma_theta_inv, double alpha_c, double beta_c, double alpha_s, double beta_s, unsigned int burnin, const arma::vec& cTF, const arma::vec& sTF, unsigned int gwg_reps, unsigned int chain_length);
-RcppExport SEXP fourPNO_Gibbs_4PNO(SEXP YSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP, SEXP mu_thetaSEXP, SEXP Sigma_theta_invSEXP, SEXP alpha_cSEXP, SEXP beta_cSEXP, SEXP alpha_sSEXP, SEXP beta_sSEXP, SEXP burninSEXP, SEXP cTFSEXP, SEXP sTFSEXP, SEXP gwg_repsSEXP, SEXP chain_lengthSEXP) {
+RcppExport SEXP _fourPNO_Gibbs_4PNO(SEXP YSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP, SEXP mu_thetaSEXP, SEXP Sigma_theta_invSEXP, SEXP alpha_cSEXP, SEXP beta_cSEXP, SEXP alpha_sSEXP, SEXP beta_sSEXP, SEXP burninSEXP, SEXP cTFSEXP, SEXP sTFSEXP, SEXP gwg_repsSEXP, SEXP chain_lengthSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -181,7 +181,7 @@ END_RCPP
 }
 // update_2pno
 Rcpp::List update_2pno(unsigned int N, unsigned int J, const arma::mat& Y, arma::mat& Z, const arma::vec& as, const arma::vec& bs, const arma::vec& theta, const arma::mat& Kaps, const arma::vec& mu_xi, const arma::mat& Sigma_xi_inv, const double& mu_theta, const double& Sigma_theta_inv);
-RcppExport SEXP fourPNO_update_2pno(SEXP NSEXP, SEXP JSEXP, SEXP YSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP KapsSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP, SEXP mu_thetaSEXP, SEXP Sigma_theta_invSEXP) {
+RcppExport SEXP _fourPNO_update_2pno(SEXP NSEXP, SEXP JSEXP, SEXP YSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP KapsSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP, SEXP mu_thetaSEXP, SEXP Sigma_theta_invSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -203,7 +203,7 @@ END_RCPP
 }
 // Gibbs_2PNO
 Rcpp::List Gibbs_2PNO(const arma::mat& Y, const arma::vec& mu_xi, const arma::mat& Sigma_xi_inv, const double& mu_theta, const double& Sigma_theta_inv, unsigned int burnin, unsigned int chain_length);
-RcppExport SEXP fourPNO_Gibbs_2PNO(SEXP YSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP, SEXP mu_thetaSEXP, SEXP Sigma_theta_invSEXP, SEXP burninSEXP, SEXP chain_lengthSEXP) {
+RcppExport SEXP _fourPNO_Gibbs_2PNO(SEXP YSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP, SEXP mu_thetaSEXP, SEXP Sigma_theta_invSEXP, SEXP burninSEXP, SEXP chain_lengthSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -217,4 +217,25 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(Gibbs_2PNO(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, burnin, chain_length));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_fourPNO_rmvnorm", (DL_FUNC) &_fourPNO_rmvnorm, 3},
+    {"_fourPNO_kappa_initialize", (DL_FUNC) &_fourPNO_kappa_initialize, 1},
+    {"_fourPNO_update_theta", (DL_FUNC) &_fourPNO_update_theta, 7},
+    {"_fourPNO_update_ab_NA", (DL_FUNC) &_fourPNO_update_ab_NA, 8},
+    {"_fourPNO_update_ab_norestriction", (DL_FUNC) &_fourPNO_update_ab_norestriction, 8},
+    {"_fourPNO_update_WKappaZ_NA", (DL_FUNC) &_fourPNO_update_WKappaZ_NA, 14},
+    {"_fourPNO_min2LL_4pno", (DL_FUNC) &_fourPNO_min2LL_4pno, 8},
+    {"_fourPNO_Y_4pno_simulate", (DL_FUNC) &_fourPNO_Y_4pno_simulate, 7},
+    {"_fourPNO_Total_Tabulate", (DL_FUNC) &_fourPNO_Total_Tabulate, 3},
+    {"_fourPNO_Gibbs_4PNO", (DL_FUNC) &_fourPNO_Gibbs_4PNO, 14},
+    {"_fourPNO_update_2pno", (DL_FUNC) &_fourPNO_update_2pno, 12},
+    {"_fourPNO_Gibbs_2PNO", (DL_FUNC) &_fourPNO_Gibbs_2PNO, 7},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_fourPNO(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
