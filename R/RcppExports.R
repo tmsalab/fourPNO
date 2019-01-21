@@ -15,7 +15,7 @@
 #' rmvnorm(2, c(0,0), diag(2))
 #' @export
 rmvnorm <- function(n, mu, sigma) {
-    .Call('fourPNO_rmvnorm', PACKAGE = 'fourPNO', n, mu, sigma)
+    .Call(`_fourPNO_rmvnorm`, n, mu, sigma)
 }
 
 #' Initialize Thresholds
@@ -27,7 +27,7 @@ rmvnorm <- function(n, mu, sigma) {
 #' @author Steven Andrew Culpepper
 #' @export
 kappa_initialize <- function(Ms) {
-    .Call('fourPNO_kappa_initialize', PACKAGE = 'fourPNO', Ms)
+    .Call(`_fourPNO_kappa_initialize`, Ms)
 }
 
 #' Internal Function for Updating Theta in Gibbs Sampler
@@ -45,7 +45,7 @@ kappa_initialize <- function(Ms) {
 #' @author Steven Andrew Culpepper
 #' @export
 update_theta <- function(N, Z, as, bs, theta, mu_theta, Sigma_theta_inv) {
-    .Call('fourPNO_update_theta', PACKAGE = 'fourPNO', N, Z, as, bs, theta, mu_theta, Sigma_theta_inv)
+    .Call(`_fourPNO_update_theta`, N, Z, as, bs, theta, mu_theta, Sigma_theta_inv)
 }
 
 #' Update a and b Parameters of 2PNO, 3PNO, 4PNO
@@ -64,7 +64,7 @@ update_theta <- function(N, Z, as, bs, theta, mu_theta, Sigma_theta_inv) {
 #' @author Steven Andrew Culpepper
 #' @export
 update_ab_NA <- function(N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv) {
-    .Call('fourPNO_update_ab_NA', PACKAGE = 'fourPNO', N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv)
+    .Call(`_fourPNO_update_ab_NA`, N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv)
 }
 
 #' Update a and b Parameters of 4pno without alpha > 0 Restriction
@@ -83,7 +83,7 @@ update_ab_NA <- function(N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv) {
 #' @author Steven Andrew Culpepper
 #' @export
 update_ab_norestriction <- function(N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv) {
-    .Call('fourPNO_update_ab_norestriction', PACKAGE = 'fourPNO', N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv)
+    .Call(`_fourPNO_update_ab_norestriction`, N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv)
 }
 
 #' Update Lower and Upper Asymptote Parameters of 4PNO
@@ -108,7 +108,7 @@ update_ab_norestriction <- function(N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv)
 #' @author Steven Andrew Culpepper
 #' @export
 update_WKappaZ_NA <- function(Y, Ysum, Z, as, bs, gs, ss, theta, Kaps, alpha_c, beta_c, alpha_s, beta_s, gwg_reps) {
-    .Call('fourPNO_update_WKappaZ_NA', PACKAGE = 'fourPNO', Y, Ysum, Z, as, bs, gs, ss, theta, Kaps, alpha_c, beta_c, alpha_s, beta_s, gwg_reps)
+    .Call(`_fourPNO_update_WKappaZ_NA`, Y, Ysum, Z, as, bs, gs, ss, theta, Kaps, alpha_c, beta_c, alpha_s, beta_s, gwg_reps)
 }
 
 #' Compute 4PNO Deviance
@@ -127,7 +127,7 @@ update_WKappaZ_NA <- function(Y, Ysum, Z, as, bs, gs, ss, theta, Kaps, alpha_c, 
 #' @author Steven Andrew Culpepper
 #' @export
 min2LL_4pno <- function(N, J, Y, as, bs, gs, ss, theta) {
-    .Call('fourPNO_min2LL_4pno', PACKAGE = 'fourPNO', N, J, Y, as, bs, gs, ss, theta)
+    .Call(`_fourPNO_min2LL_4pno`, N, J, Y, as, bs, gs, ss, theta)
 }
 
 #' Simulate from 4PNO Model
@@ -145,7 +145,7 @@ min2LL_4pno <- function(N, J, Y, as, bs, gs, ss, theta) {
 #' @author Steven Andrew Culpepper
 #' @export
 Y_4pno_simulate <- function(N, J, as, bs, gs, ss, theta) {
-    .Call('fourPNO_Y_4pno_simulate', PACKAGE = 'fourPNO', N, J, as, bs, gs, ss, theta)
+    .Call(`_fourPNO_Y_4pno_simulate`, N, J, as, bs, gs, ss, theta)
 }
 
 #' Calculate Tabulated Total Scores 
@@ -159,7 +159,7 @@ Y_4pno_simulate <- function(N, J, as, bs, gs, ss, theta) {
 #' @author Steven Andrew Culpepper
 #' @export
 Total_Tabulate <- function(N, J, Y) {
-    .Call('fourPNO_Total_Tabulate', PACKAGE = 'fourPNO', N, J, Y)
+    .Call(`_fourPNO_Total_Tabulate`, N, J, Y)
 }
 
 #' Gibbs Implementation of 4PNO
@@ -222,7 +222,7 @@ Total_Tabulate <- function(N, J, Y) {
 #' colnames(OUT) = c('Item','as','bs','gs','ss','as_sd','bs_sd','gs_sd','ss_sd')
 #' print(OUT,digits=3)
 Gibbs_4PNO <- function(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, alpha_c, beta_c, alpha_s, beta_s, burnin, cTF, sTF, gwg_reps, chain_length = 10000L) {
-    .Call('fourPNO_Gibbs_4PNO', PACKAGE = 'fourPNO', Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, alpha_c, beta_c, alpha_s, beta_s, burnin, cTF, sTF, gwg_reps, chain_length)
+    .Call(`_fourPNO_Gibbs_4PNO`, Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, alpha_c, beta_c, alpha_s, beta_s, burnin, cTF, sTF, gwg_reps, chain_length)
 }
 
 #' Update 2PNO Model Parameters
@@ -245,7 +245,7 @@ Gibbs_4PNO <- function(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, alpha_
 #' @author Steven Andrew Culpepper
 #' @export
 update_2pno <- function(N, J, Y, Z, as, bs, theta, Kaps, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv) {
-    .Call('fourPNO_update_2pno', PACKAGE = 'fourPNO', N, J, Y, Z, as, bs, theta, Kaps, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv)
+    .Call(`_fourPNO_update_2pno`, N, J, Y, Z, as, bs, theta, Kaps, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv)
 }
 
 #' Gibbs Implementation of 2PNO
@@ -299,6 +299,6 @@ update_2pno <- function(N, J, Y, Z, as, bs, theta, Kaps, mu_xi, Sigma_xi_inv, mu
 #' colnames(OUT) = c('Item','as','bs','gs','ss','as_sd','bs_sd','gs_sd','ss_sd')
 #' print(OUT, digits=3)
 Gibbs_2PNO <- function(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, burnin, chain_length = 10000L) {
-    .Call('fourPNO_Gibbs_2PNO', PACKAGE = 'fourPNO', Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, burnin, chain_length)
+    .Call(`_fourPNO_Gibbs_2PNO`, Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, burnin, chain_length)
 }
 
