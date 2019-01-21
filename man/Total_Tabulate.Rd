@@ -7,9 +7,9 @@
 Total_Tabulate(N, J, Y)
 }
 \arguments{
-\item{N}{An \code{int}, which gives the number of observations.  (> 0)}
+\item{N}{An \code{int}, which gives the number of observations. (> 0)}
 
-\item{J}{An \code{int}, which gives the number of items.  (> 0)}
+\item{J}{An \code{int}, which gives the number of items. (> 0)}
 
 \item{Y}{A N by J \code{matrix} of item responses.}
 }
@@ -20,7 +20,7 @@ A vector of tabulated total scores.
 Internal function to -2LL
 }
 \seealso{
-\code{\link{Gibbs_4PNO}}
+\code{\link[=Gibbs_4PNO]{Gibbs_4PNO()}}
 }
 \author{
 Steven Andrew Culpepper

@@ -7,9 +7,9 @@
 Y_4pno_simulate(N, J, as, bs, gs, ss, theta)
 }
 \arguments{
-\item{N}{An \code{int}, which gives the number of observations.  (> 0)}
+\item{N}{An \code{int}, which gives the number of observations. (> 0)}
 
-\item{J}{An \code{int}, which gives the number of items.  (> 0)}
+\item{J}{An \code{int}, which gives the number of items. (> 0)}
 
 \item{as}{A \code{vector} of item discrimination parameters.}
 
@@ -28,7 +28,7 @@ A N by J \code{matrix} of dichotomous item responses.
 Generate item responses under the 4PNO
 }
 \seealso{
-\code{\link{Gibbs_4PNO}}
+\code{\link[=Gibbs_4PNO]{Gibbs_4PNO()}}
 }
 \author{
 Steven Andrew Culpepper

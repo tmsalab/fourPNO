@@ -9,18 +9,21 @@ rmvnorm(n, mu, sigma)
 \arguments{
 \item{n}{An \code{int}, which gives the number of observations.  (> 0)}
 
-\item{mu}{A \code{vector} length m that represents the means of the normals.}
+\item{mu}{A \code{vector} length m that represents the means of
+the normals.}
 
-\item{sigma}{A \code{matrix} with dimensions m x m that provides the covariance matrix.}
+\item{sigma}{A \code{matrix} with dimensions m x m that provides the
+covariance matrix.}
 }
 \value{
 A \code{matrix} that is a Multivariate Normal distribution
 }
 \description{
-Creates a random Multivariate Normal when given number of obs, mean, and sigma.
+Creates a random Multivariate Normal when given number of
+obs, mean, and sigma.
 }
 \examples{
-#Call with the following data:
+# Call with the following data:
 rmvnorm(2, c(0,0), diag(2))
 }
 \author{
