@@ -4,8 +4,9 @@
 \alias{Gibbs_4PNO}
 \title{Gibbs Implementation of 4PNO}
 \usage{
-Gibbs_4PNO(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, alpha_c, beta_c,
-  alpha_s, beta_s, burnin, cTF, sTF, gwg_reps, chain_length = 10000L)
+Gibbs_4PNO(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, alpha_c,
+  beta_c, alpha_s, beta_s, burnin, cTF, sTF, gwg_reps,
+  chain_length = 10000L)
 }
 \arguments{
 \item{Y}{A N by J \code{matrix} of item responses.}
