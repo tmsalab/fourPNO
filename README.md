@@ -1,15 +1,19 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Travis-CI Build
-Status](https://travis-ci.org/tmsalab/fourPNO.svg?branch=master)](https://travis-ci.org/tmsalab/fourPNO)
+[![Build
+Status](https://travis-ci.org/tmsalab/fourPNO.svg)](https://travis-ci.org/tmsalab/fourPNO)
 [![Package-License](http://img.shields.io/badge/license-GPL%20\(%3E=2\)-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 [![CRAN Version
 Badge](http://www.r-pkg.org/badges/version/fourPNO)](https://cran.r-project.org/package=fourPNO)
-[![CRAN RStudio Monthly Mirror
-Downloads](http://cranlogs.r-pkg.org/badges/fourPNO)](http://www.r-pkg.org/pkg/fourPNO)
-[![Grand Total of
+[![CRAN
+Status](https://cranchecks.info/badges/worst/fourPNO)](https://cran.r-project.org/web/checks/check_results_fourPNO.html)
+[![RStudio CRAN Mirror’s Monthly
+Downloads](http://cranlogs.r-pkg.org/badges/fourPNO?color=brightgreen)](http://www.r-pkg.org/pkg/fourPNO)
+[![RStudio CRAN Mirror’s Total
 Downloads](http://cranlogs.r-pkg.org/badges/grand-total/fourPNO?color=brightgreen)](http://www.r-pkg.org/pkg/fourPNO)
+[![Coverage
+status](https://codecov.io/gh/tmsalab/fourPNO/branch/master/graph/badge.svg)](https://codecov.io/github/tmsalab/fourPNO?branch=master)
 
 # `fourPNO` R package
 
