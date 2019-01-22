@@ -17,10 +17,11 @@ status](https://codecov.io/gh/tmsalab/fourPNO/branch/master/graph/badge.svg)](ht
 
 # `fourPNO` R package
 
-Estimate Barton & Lord’s (1981) <doi:10.1002/j.2333-8504.1981.tb01255.x>
-four parameter IRT model with lower and upper asymptotes using Bayesian
-formulation described by Culpepper (2016)
-<doi:10.1007/s11336-015-9477-6>.
+Estimate Barton & Lord’s (1981)
+<https://doi.org/10.1002/j.2333-8504.1981.tb01255.x> four parameter IRT
+model with lower and upper asymptotes using Bayesian formulation
+described by Culpepper (2016)
+<https://doi.org/10.1007/s11336-015-9477-6>.
 
 ## Installation
 
