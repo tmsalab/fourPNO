@@ -10,9 +10,11 @@ Gibbs_2PNO(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, burnin,
 \arguments{
 \item{Y}{A N by J \code{matrix} of item responses.}
 
-\item{mu_xi}{A two dimensional \code{vector} of prior item parameter means.}
+\item{mu_xi}{A two dimensional \code{vector} of prior item parameter
+means.}
 
-\item{Sigma_xi_inv}{A two dimensional identity \code{matrix} of prior item parameter VC matrix.}
+\item{Sigma_xi_inv}{A two dimensional identity \code{matrix} of prior item
+parameter VC matrix.}
 
 \item{mu_theta}{The prior mean for theta.}
 
@@ -29,7 +31,6 @@ Samples from posterior.
 Implement Gibbs 2PNO Sampler
 }
 \examples{
-require(fourPNO)
 # simulate small 2PNO dataset to demonstrate function
 J = 5
 N = 100
@@ -54,8 +55,9 @@ Sigma_xi_inv = solve(2*matrix(c(1,0,0,1), 2, 2))
 burnin = 1000
 
 # Execute Gibbs sampler. This should take about 15.5 minutes
-out_t <- Gibbs_4PNO(Y_t,mu_xi,Sigma_xi_inv,mu_theta,Sigma_theta_inv,alpha_c,beta_c,alpha_s,
-                    beta_s,burnin,rep(1,J),rep(1,J),gwg_reps=5,chain_length=burnin*2)
+out_t = Gibbs_4PNO(Y_t,mu_xi,Sigma_xi_inv,mu_theta,Sigma_theta_inv,
+                    alpha_c,beta_c,alpha_s, beta_s,burnin,
+                    rep(1,J),rep(1,J),gwg_reps=5,chain_length=burnin*2)
        
 # Summarizing posterior distribution
 OUT = cbind(apply(out_t$AS[,-c(1:burnin)],1,mean),apply(out_t$BS[,-c(1:burnin)],1,mean),

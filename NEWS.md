@@ -1,6 +1,19 @@
-# fourPNO 1.0.4.1000
+# fourPNO 1.0.5
 
-- Switched generation of native registration to Rcpp.
+## Changes
+
+- Increased _R_ dependency to 3.5.0.
+- Autogenerate native registration with Rcpp 1.0.0.
+- Suppressed internal functions from being exported.
+
+## Documentation
+
+- Enabled markdown in documentation.
+- Cleaned up documentation entries.
+
+## Testing
+
+- Enabled TMSA Lab's travis-ci configuration.
 
 # fourPNO 1.0.4
 

@@ -30,7 +30,7 @@ min2LL_4pno(N, J, Y, as, bs, gs, ss, theta)
 Internal function to -2LL
 }
 \seealso{
-\code{\link{Gibbs_4PNO}}
+\code{\link[=Gibbs_4PNO]{Gibbs_4PNO()}}
 }
 \author{
 Steven Andrew Culpepper

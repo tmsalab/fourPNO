@@ -6,9 +6,9 @@
 \alias{fourPNO-package}
 \title{fourPNO: Bayesian 4 Parameter Item Response Model}
 \description{
-Estimate Barton & Lord's (1981) <doi:10.1002/j.2333-8504.1981.tb01255.x>
-four parameter IRT model with lower and upper asymptotes using Bayesian
-formulation described by Culpepper (2016) <doi:10.1007/s11336-015-9477-6>.
+Estimate Barton & Lord's (1981) <doi:10.1002/j.2333-8504.1981.tb01255.x> 
+    four parameter IRT model with lower and upper asymptotes using Bayesian
+    formulation described by Culpepper (2016) <doi:10.1007/s11336-015-9477-6>.
 }
 \seealso{
 Useful links:
@@ -19,6 +19,6 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Steven Andrew Culpepper \email{sculpepp@illinois.edu}
+\strong{Maintainer}: Steven Andrew Culpepper \email{sculpepp@illinois.edu} (0000-0003-4226-6176) [copyright holder]
 
 }

@@ -19,94 +19,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// kappa_initialize
-arma::mat kappa_initialize(const arma::vec& Ms);
-RcppExport SEXP _fourPNO_kappa_initialize(SEXP MsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::vec& >::type Ms(MsSEXP);
-    rcpp_result_gen = Rcpp::wrap(kappa_initialize(Ms));
-    return rcpp_result_gen;
-END_RCPP
-}
-// update_theta
-Rcpp::List update_theta(unsigned int N, const arma::mat& Z, const arma::vec& as, const arma::vec& bs, arma::vec& theta, const double& mu_theta, const double& Sigma_theta_inv);
-RcppExport SEXP _fourPNO_update_theta(SEXP NSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP mu_thetaSEXP, SEXP Sigma_theta_invSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< unsigned int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< const arma::mat& >::type Z(ZSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type as(asSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type bs(bsSEXP);
-    Rcpp::traits::input_parameter< arma::vec& >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< const double& >::type mu_theta(mu_thetaSEXP);
-    Rcpp::traits::input_parameter< const double& >::type Sigma_theta_inv(Sigma_theta_invSEXP);
-    rcpp_result_gen = Rcpp::wrap(update_theta(N, Z, as, bs, theta, mu_theta, Sigma_theta_inv));
-    return rcpp_result_gen;
-END_RCPP
-}
-// update_ab_NA
-Rcpp::List update_ab_NA(unsigned int N, unsigned int J, const arma::mat& Z, arma::vec& as, arma::vec& bs, const arma::vec& theta, const arma::vec& mu_xi, const arma::mat& Sigma_xi_inv);
-RcppExport SEXP _fourPNO_update_ab_NA(SEXP NSEXP, SEXP JSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< unsigned int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type J(JSEXP);
-    Rcpp::traits::input_parameter< const arma::mat& >::type Z(ZSEXP);
-    Rcpp::traits::input_parameter< arma::vec& >::type as(asSEXP);
-    Rcpp::traits::input_parameter< arma::vec& >::type bs(bsSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type mu_xi(mu_xiSEXP);
-    Rcpp::traits::input_parameter< const arma::mat& >::type Sigma_xi_inv(Sigma_xi_invSEXP);
-    rcpp_result_gen = Rcpp::wrap(update_ab_NA(N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv));
-    return rcpp_result_gen;
-END_RCPP
-}
-// update_ab_norestriction
-Rcpp::List update_ab_norestriction(unsigned int N, unsigned int J, const arma::mat& Z, arma::vec& as, arma::vec& bs, const arma::vec& theta, const arma::vec& mu_xi, const arma::mat& Sigma_xi_inv);
-RcppExport SEXP _fourPNO_update_ab_norestriction(SEXP NSEXP, SEXP JSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< unsigned int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type J(JSEXP);
-    Rcpp::traits::input_parameter< const arma::mat& >::type Z(ZSEXP);
-    Rcpp::traits::input_parameter< arma::vec& >::type as(asSEXP);
-    Rcpp::traits::input_parameter< arma::vec& >::type bs(bsSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type mu_xi(mu_xiSEXP);
-    Rcpp::traits::input_parameter< const arma::mat& >::type Sigma_xi_inv(Sigma_xi_invSEXP);
-    rcpp_result_gen = Rcpp::wrap(update_ab_norestriction(N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv));
-    return rcpp_result_gen;
-END_RCPP
-}
-// update_WKappaZ_NA
-Rcpp::List update_WKappaZ_NA(const arma::mat& Y, const arma::vec& Ysum, arma::mat& Z, const arma::vec& as, const arma::vec& bs, const arma::vec& gs, const arma::vec& ss, const arma::vec& theta, const arma::mat& Kaps, double alpha_c, double beta_c, double alpha_s, double beta_s, unsigned int gwg_reps);
-RcppExport SEXP _fourPNO_update_WKappaZ_NA(SEXP YSEXP, SEXP YsumSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP gsSEXP, SEXP ssSEXP, SEXP thetaSEXP, SEXP KapsSEXP, SEXP alpha_cSEXP, SEXP beta_cSEXP, SEXP alpha_sSEXP, SEXP beta_sSEXP, SEXP gwg_repsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::mat& >::type Y(YSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type Ysum(YsumSEXP);
-    Rcpp::traits::input_parameter< arma::mat& >::type Z(ZSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type as(asSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type bs(bsSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type gs(gsSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type ss(ssSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< const arma::mat& >::type Kaps(KapsSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha_c(alpha_cSEXP);
-    Rcpp::traits::input_parameter< double >::type beta_c(beta_cSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha_s(alpha_sSEXP);
-    Rcpp::traits::input_parameter< double >::type beta_s(beta_sSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type gwg_reps(gwg_repsSEXP);
-    rcpp_result_gen = Rcpp::wrap(update_WKappaZ_NA(Y, Ysum, Z, as, bs, gs, ss, theta, Kaps, alpha_c, beta_c, alpha_s, beta_s, gwg_reps));
-    return rcpp_result_gen;
-END_RCPP
-}
 // min2LL_4pno
 double min2LL_4pno(unsigned int N, unsigned int J, const arma::mat& Y, const arma::vec& as, const arma::vec& bs, const arma::vec& gs, const arma::vec& ss, const arma::vec& theta);
 RcppExport SEXP _fourPNO_min2LL_4pno(SEXP NSEXP, SEXP JSEXP, SEXP YSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP gsSEXP, SEXP ssSEXP, SEXP thetaSEXP) {
@@ -179,28 +91,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// update_2pno
-Rcpp::List update_2pno(unsigned int N, unsigned int J, const arma::mat& Y, arma::mat& Z, const arma::vec& as, const arma::vec& bs, const arma::vec& theta, const arma::mat& Kaps, const arma::vec& mu_xi, const arma::mat& Sigma_xi_inv, const double& mu_theta, const double& Sigma_theta_inv);
-RcppExport SEXP _fourPNO_update_2pno(SEXP NSEXP, SEXP JSEXP, SEXP YSEXP, SEXP ZSEXP, SEXP asSEXP, SEXP bsSEXP, SEXP thetaSEXP, SEXP KapsSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP, SEXP mu_thetaSEXP, SEXP Sigma_theta_invSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< unsigned int >::type N(NSEXP);
-    Rcpp::traits::input_parameter< unsigned int >::type J(JSEXP);
-    Rcpp::traits::input_parameter< const arma::mat& >::type Y(YSEXP);
-    Rcpp::traits::input_parameter< arma::mat& >::type Z(ZSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type as(asSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type bs(bsSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type theta(thetaSEXP);
-    Rcpp::traits::input_parameter< const arma::mat& >::type Kaps(KapsSEXP);
-    Rcpp::traits::input_parameter< const arma::vec& >::type mu_xi(mu_xiSEXP);
-    Rcpp::traits::input_parameter< const arma::mat& >::type Sigma_xi_inv(Sigma_xi_invSEXP);
-    Rcpp::traits::input_parameter< const double& >::type mu_theta(mu_thetaSEXP);
-    Rcpp::traits::input_parameter< const double& >::type Sigma_theta_inv(Sigma_theta_invSEXP);
-    rcpp_result_gen = Rcpp::wrap(update_2pno(N, J, Y, Z, as, bs, theta, Kaps, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv));
-    return rcpp_result_gen;
-END_RCPP
-}
 // Gibbs_2PNO
 Rcpp::List Gibbs_2PNO(const arma::mat& Y, const arma::vec& mu_xi, const arma::mat& Sigma_xi_inv, const double& mu_theta, const double& Sigma_theta_inv, unsigned int burnin, unsigned int chain_length);
 RcppExport SEXP _fourPNO_Gibbs_2PNO(SEXP YSEXP, SEXP mu_xiSEXP, SEXP Sigma_xi_invSEXP, SEXP mu_thetaSEXP, SEXP Sigma_theta_invSEXP, SEXP burninSEXP, SEXP chain_lengthSEXP) {
@@ -221,16 +111,10 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_fourPNO_rmvnorm", (DL_FUNC) &_fourPNO_rmvnorm, 3},
-    {"_fourPNO_kappa_initialize", (DL_FUNC) &_fourPNO_kappa_initialize, 1},
-    {"_fourPNO_update_theta", (DL_FUNC) &_fourPNO_update_theta, 7},
-    {"_fourPNO_update_ab_NA", (DL_FUNC) &_fourPNO_update_ab_NA, 8},
-    {"_fourPNO_update_ab_norestriction", (DL_FUNC) &_fourPNO_update_ab_norestriction, 8},
-    {"_fourPNO_update_WKappaZ_NA", (DL_FUNC) &_fourPNO_update_WKappaZ_NA, 14},
     {"_fourPNO_min2LL_4pno", (DL_FUNC) &_fourPNO_min2LL_4pno, 8},
     {"_fourPNO_Y_4pno_simulate", (DL_FUNC) &_fourPNO_Y_4pno_simulate, 7},
     {"_fourPNO_Total_Tabulate", (DL_FUNC) &_fourPNO_Total_Tabulate, 3},
     {"_fourPNO_Gibbs_4PNO", (DL_FUNC) &_fourPNO_Gibbs_4PNO, 14},
-    {"_fourPNO_update_2pno", (DL_FUNC) &_fourPNO_update_2pno, 12},
     {"_fourPNO_Gibbs_2PNO", (DL_FUNC) &_fourPNO_Gibbs_2PNO, 7},
     {NULL, NULL, 0}
 };
