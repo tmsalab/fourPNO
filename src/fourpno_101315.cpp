@@ -99,7 +99,7 @@ arma::mat kappa_initialize(const arma::vec &Ms)
 //' [Gibbs_4PNO()]
 //'
 //' @noRd
-Rcpp::List update_theta(unsigned int N, const arma::mat &Z, const arma::vec &as,
+void update_theta(unsigned int N, const arma::mat &Z, const arma::vec &as,
                         const arma::vec &bs, arma::vec &theta,
                         const double &mu_theta, const double &Sigma_theta_inv)
 {
@@ -114,13 +114,6 @@ Rcpp::List update_theta(unsigned int N, const arma::mat &Z, const arma::vec &as,
     theta = zetas * sqrt(vartheta) +
             vartheta * (Z * as + oneN * (apb + mu_theta * Sigma_theta_inv));
 
-    return Rcpp::List::create( // Rcpp::Named("theta",theta),
-        Rcpp::Named("apb", apb)
-        //                            Rcpp::Named("ajIakIna",ajIakIna),
-        //                            Rcpp::Named("AZ",AZ),
-        //                            Rcpp::Named("Sigma_theta_star",Sigma_theta_star),
-        //                            Rcpp::Named("mu_theta_star",mu_theta_star)
-    );
 }
 
 //' Update a and b Parameters of 2PNO, 3PNO, 4PNO
@@ -672,8 +665,8 @@ Rcpp::List Gibbs_4PNO(const arma::mat &Y, const arma::vec &mu_xi,
 
         // Update theta. Theta is stored in memory and function should update
         // each iteration too.
-        Rcpp::List step3theta =
-            update_theta(N, Z, as, bs, theta, mu_theta, Sigma_theta_inv);
+        update_theta(N, Z, as, bs, theta, mu_theta, Sigma_theta_inv);
+        
         // saving means and vcs of thetas
         SD_thetas(t) = stddev(theta);
         ms_thetas(t) = mean(theta);
