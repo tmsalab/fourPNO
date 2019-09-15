@@ -200,7 +200,7 @@ void update_ab_NA(unsigned int N, unsigned int J, const arma::mat &Z,
 //' [Gibbs_4PNO()]
 //'
 //' @noRd
-Rcpp::List update_ab_norestriction(unsigned int N, unsigned int J,
+void update_ab_norestriction(unsigned int N, unsigned int J,
                                    const arma::mat &Z, arma::vec &as,
                                    arma::vec &bs, const arma::vec &theta,
                                    const arma::vec &mu_xi,
@@ -233,8 +233,6 @@ Rcpp::List update_ab_norestriction(unsigned int N, unsigned int J,
         bs(j) = R::qnorm(ub, mb_a, sqrt(vb_a), 1, 0);
     }
 
-    return Rcpp::List::create( // Rcpp::Named("XX_xi")=XX_xi,
-        Rcpp::Named("ua") = ua);
 }
 
 //' Update Lower and Upper Asymptote Parameters of 4PNO
@@ -646,10 +644,7 @@ Rcpp::List Gibbs_4PNO(const arma::mat &Y, const arma::vec &mu_xi,
         // Update a, b; as and bs should be automatically updated here by
         // writing to disk
         update_ab_NA(N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv);
-        //    Rcpp::List ste2ab =
-        //    update_ab_norestriction(N,J,Z,as,bs,theta,mu_xi,Sigma_xi_inv);//I(alpha>0)
-        //    removed
-
+        
         // Update theta. Theta is stored in memory and function should update
         // each iteration too.
         update_theta(N, Z, as, bs, theta, mu_theta, Sigma_theta_inv);
