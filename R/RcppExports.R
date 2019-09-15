@@ -55,8 +55,8 @@ NULL
 #' @param bs           A `vector` of item threshold parameters.
 #' @param theta        A `vector` of prior thetas.
 #' @param mu_xi        A two dimensional `vector` of prior item parameter
-NULL
-
+#'                     means.
+#' @param Sigma_xi_inv A two dimensional identity `matrix` of prior item
 #'                     parameter VC matrix.
 #'
 #' @return
@@ -82,8 +82,9 @@ NULL
 #' @param bs           A `vector` of item threshold parameters.
 #' @param theta        A `vector` of prior thetas.
 #' @param mu_xi        A two dimensional `vector` of prior item parameter
-NULL
-
+#'                     means.
+#' @param Sigma_xi_inv A two dimensional identity `matrix` of prior item
+#'                     parameter VC matrix.
 #'
 #' @return
 #' A `list` of item parameters.
@@ -129,6 +130,136 @@ NULL
 #'
 #' @noRd
 NULL
+
+#' Update 2PNO Model Parameters
+#'
+#' Internal function to update 2PNO parameters
+#'
+#' @param N               The number of observations.
+#' @param J               The number of items.
+#' @param Y               A N by J `matrix` of item responses.
+#' @param Z               A `matrix` N by J of continuous augmented data.
+#' @param as              A `vector` of item discrimination parameters.
+#' @param bs              A `vector` of item threshold parameters.
+#' @param theta           A `vector` of prior thetas.
+#' @param Kaps            A `matrix` for item thresholds
+#'                        (used for internal computations).
+#' @param mu_xi           Prior mean for item parameters.
+#' @param Sigma_xi_inv    Prior item parameter inverse variance-covariance
+#'                        matrix.
+#' @param mu_theta        Prior mean for theta.
+#' @param Sigma_theta_inv Prior inverse variance for theta.
+#'
+#' @return
+#' A `list` of item parameters.
+#'
+#' @author
+#' Steven Andrew Culpepper
+#'
+#' @seealso
+#' [Gibbs_2PNO()]
+#'
+#' @noRd
+NULL
+
+#' Generate Random Multivariate Normal Distribution
+#'
+#' Creates a random Multivariate Normal when given number of
+#' obs, mean, and sigma.
+#'
+#' @param n     An `int`, which gives the number of observations.  (> 0)
+#' @param mu    A `vector` length m that represents the means of
+#'              the normals.
+#' @param sigma A `matrix` with dimensions m x m that provides the
+#'              covariance matrix.
+#'
+#' @return
+#' A `matrix` that is a Multivariate Normal distribution
+#'
+#' @author
+#' James J Balamuta
+#'
+#' @export
+#' @examples
+#' # Call with the following data:
+#' rmvnorm(2, c(0,0), diag(2))
+rmvnorm <- function(n, mu, sigma) {
+    .Call(`_fourPNO_rmvnorm`, n, mu, sigma)
+}
+
+#' Compute 4PNO Deviance
+#'
+#' Internal function to -2LL
+#'
+#' @param N     An `int`, which gives the number of observations.  (> 0)
+#' @param J     An `int`, which gives the number of items.  (> 0)
+#' @param Y     A N by J `matrix` of item responses.
+#' @param as    A `vector` of item discrimination parameters.
+#' @param bs    A `vector` of item threshold parameters.
+#' @param gs    A `vector` of item lower asymptote parameters.
+#' @param ss    A `vector` of item upper asymptote parameters.
+#' @param theta A `vector` of prior thetas.
+#'
+#' @return
+#' -2LL.
+#' @author
+#' Steven Andrew Culpepper
+#'
+#' @seealso
+#' [Gibbs_4PNO()]
+#'
+#' @export
+min2LL_4pno <- function(N, J, Y, as, bs, gs, ss, theta) {
+    .Call(`_fourPNO_min2LL_4pno`, N, J, Y, as, bs, gs, ss, theta)
+}
+
+#' Simulate from 4PNO Model
+#'
+#' Generate item responses under the 4PNO
+#'
+#' @param N     An `int`, which gives the number of observations. (> 0)
+#' @param J     An `int`, which gives the number of items. (> 0)
+#' @param as    A `vector` of item discrimination parameters.
+#' @param bs    A `vector` of item threshold parameters.
+#' @param gs    A `vector` of item lower asymptote parameters.
+#' @param ss    A `vector` of item upper asymptote parameters.
+#' @param theta A `vector` of prior thetas.
+#'
+#' @return
+#' A N by J `matrix` of dichotomous item responses.
+#'
+#' @author
+#' Steven Andrew Culpepper
+#'
+#' @seealso
+#' [Gibbs_4PNO()]
+#'
+#' @export
+Y_4pno_simulate <- function(N, J, as, bs, gs, ss, theta) {
+    .Call(`_fourPNO_Y_4pno_simulate`, N, J, as, bs, gs, ss, theta)
+}
+
+#' Calculate Tabulated Total Scores
+#'
+#' Internal function to -2LL
+#'
+#' @param N  An `int`, which gives the number of observations. (> 0)
+#' @param J  An `int`, which gives the number of items. (> 0)
+#' @param Y  A N by J `matrix` of item responses.
+#'
+#' @return
+#' A vector of tabulated total scores.
+#'
+#' @author
+#' Steven Andrew Culpepper
+#'
+#' @seealso
+#' [Gibbs_4PNO()]
+#'
+#' @export
+Total_Tabulate <- function(N, J, Y) {
+    .Call(`_fourPNO_Total_Tabulate`, N, J, Y)
+}
 
 #' Gibbs Implementation of 4PNO
 #'
@@ -207,39 +338,12 @@ NULL
 #'             apply(out_t$SS[,-c(1:burnin)],1,sd) )
 #'
 #' OUT = cbind(1:J,OUT)
-#' colnames(OUT) =
-NULL
-
-#' Update 2PNO Model Parameters
-#'
-#' Internal function to update 2PNO parameters
-#'
-#' @param N               The number of observations.
-#' @param J               The number of items.
-#' @param Y               A N by J `matrix` of item responses.
-#' @param Z               A `matrix` N by J of continuous augmented data.
-#' @param as              A `vector` of item discrimination parameters.
-#' @param bs              A `vector` of item threshold parameters.
-#' @param theta           A `vector` of prior thetas.
-#' @param Kaps            A `matrix` for item thresholds
-#'                        (used for internal computations).
-#' @param mu_xi           Prior mean for item parameters.
-#' @param Sigma_xi_inv    Prior item parameter inverse variance-covariance
-#'                        matrix.
-#' @param mu_theta        Prior mean for theta.
-#' @param Sigma_theta_inv Prior inverse variance for theta.
-#'
-#' @return
-#' A `list` of item parameters.
-#'
-#' @author
-#' Steven Andrew Culpepper
-#'
-#' @seealso
-#' [Gibbs_2PNO()]
-#'
-#' @noRd
-NULL
+#' colnames(OUT) = c('Item', 'as', 'bs', 'gs', 'ss', 'as_sd', 'bs_sd',
+#'                   'gs_sd', 'ss_sd')
+#' print(OUT, digits = 3)
+Gibbs_4PNO <- function(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, alpha_c, beta_c, alpha_s, beta_s, burnin, cTF, sTF, gwg_reps, chain_length = 10000L) {
+    .Call(`_fourPNO_Gibbs_4PNO`, Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, alpha_c, beta_c, alpha_s, beta_s, burnin, cTF, sTF, gwg_reps, chain_length)
+}
 
 #' Gibbs Implementation of 2PNO
 #'
@@ -292,116 +396,20 @@ NULL
 #'                     rep(1,J),rep(1,J),gwg_reps=5,chain_length=burnin*2)
 #'
 #' # Summarizing posterior distribution
-#' OUT =
-NULL
-
-#' apply(out_t$GS[,-c(1:burnin)],1,mean),apply(out_t$SS[,-c(1:burnin)],1,mean),
-#' apply(out_t$AS[,-c(1:burnin)],1,sd),apply(out_t$BS[,-c(1:burnin)],1,sd), '
-NULL
-
-#' Generate Random Multivariate Normal Distribution
-#'
-#' Creates a random Multivariate Normal when given number of
-#' obs, mean, and sigma.
-#'
-#' @param n     An `int`, which gives the number of observations.  (> 0)
-#' @param mu    A `vector` length m that represents the means of
-#'              the normals.
-#' @param sigma A `matrix` with dimensions m x m that provides the
-#'              covariance matrix.
-#'
-#' @return
-#' A `matrix` that is a Multivariate Normal distribution
-#'
-#' @author
-#' James J Balamuta
-#'
-#' @export
-#' @examples
-#' # Call with the following data:
-#' rmvnorm(2, c(0,0), diag(2))
-rmvnorm <- function(n, mu, sigma) {
-    .Call(`_fourPNO_rmvnorm`, n, mu, sigma)
-}
-
-#' Compute 4PNO Deviance
-#'
-#' Internal function to -2LL
-#'
-#' @param N An `int`, which gives the number of observations.  (> 0)
-#' @param J An `int`, which gives the number of items.  (> 0)
-#' @param Y A N by J `matrix` of item responses.
-#' @param as A `vector` of item discrimination parameters.
-#' @param bs A `vector` of item threshold parameters.
-#' @param gs A `vector` of item lower asymptote parameters.
-#' @param ss A `vector` of item upper asymptote parameters.
-#' @param theta A `vector` of prior thetas.
-#'
-#' @return
-#' -2LL.
-#' @author
-#' Steven Andrew Culpepper
-#'
-#' @seealso
-#' [Gibbs_4PNO()]
-#'
-#' @export
-min2LL_4pno <- function(N, J, Y, as, bs, gs, ss, theta) {
-    .Call(`_fourPNO_min2LL_4pno`, N, J, Y, as, bs, gs, ss, theta)
-}
-
-#' Simulate from 4PNO Model
-#'
-#' Generate item responses under the 4PNO
-#'
-#' @param N     An `int`, which gives the number of observations. (> 0)
-#' @param J     An `int`, which gives the number of items. (> 0)
-#' @param as    A `vector` of item discrimination parameters.
-#' @param bs    A `vector` of item threshold parameters.
-#' @param gs    A `vector` of item lower asymptote parameters.
-#' @param ss    A `vector` of item upper asymptote parameters.
-#' @param theta A `vector` of prior thetas.
-#'
-#' @return
-#' A N by J `matrix` of dichotomous item responses.
-#'
-#' @author
-#' Steven Andrew Culpepper
-#'
-#' @seealso
-#' [Gibbs_4PNO()]
-#'
-#' @export
-Y_4pno_simulate <- function(N, J, as, bs, gs, ss, theta) {
-    .Call(`_fourPNO_Y_4pno_simulate`, N, J, as, bs, gs, ss, theta)
-}
-
-#' Calculate Tabulated Total Scores
-#'
-#' Internal function to -2LL
-#'
-#' @param N  An `int`, which gives the number of observations. (> 0)
-#' @param J  An `int`, which gives the number of items. (> 0)
-#' @param Y  A N by J `matrix` of item responses.
-#'
-#' @return
-#' A vector of tabulated total scores.
-#'
-#' @author
-#' Steven Andrew Culpepper
-#'
-#' @seealso
-#' [Gibbs_4PNO()]
-#'
-#' @export
-Total_Tabulate <- function(N, J, Y) {
-    .Call(`_fourPNO_Total_Tabulate`, N, J, Y)
-}
-
-Gibbs_4PNO <- function(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, alpha_c, beta_c, alpha_s, beta_s, burnin, cTF, sTF, gwg_reps, chain_length = 10000L) {
-    .Call(`_fourPNO_Gibbs_4PNO`, Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, alpha_c, beta_c, alpha_s, beta_s, burnin, cTF, sTF, gwg_reps, chain_length)
-}
-
+#' OUT = cbind(
+#'     apply(out_t$AS[, -c(1:burnin)], 1, mean),
+#'     apply(out_t$BS[, -c(1:burnin)], 1, mean),
+#'     apply(out_t$GS[, -c(1:burnin)], 1, mean),
+#'     apply(out_t$SS[, -c(1:burnin)], 1, mean),
+#'     apply(out_t$AS[, -c(1:burnin)], 1, sd),
+#'     apply(out_t$BS[, -c(1:burnin)], 1, sd),
+#'     apply(out_t$GS[, -c(1:burnin)], 1, sd),
+#'     apply(out_t$SS[, -c(1:burnin)], 1, sd)
+#' )
+#' OUT = cbind(1:J, OUT)
+#' colnames(OUT) = c('Item','as','bs','gs','ss','as_sd','bs_sd',
+#'                   'gs_sd','ss_sd')
+#' print(OUT, digits = 3)
 Gibbs_2PNO <- function(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, burnin, chain_length = 10000L) {
     .Call(`_fourPNO_Gibbs_2PNO`, Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, burnin, chain_length)
 }
