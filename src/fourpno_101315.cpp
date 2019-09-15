@@ -134,7 +134,8 @@ Rcpp::List update_theta(unsigned int N, const arma::mat &Z, const arma::vec &as,
 //' @param bs           A `vector` of item threshold parameters.
 //' @param theta        A `vector` of prior thetas.
 //' @param mu_xi        A two dimensional `vector` of prior item parameter
-//means. ' @param Sigma_xi_inv A two dimensional identity `matrix` of prior item
+//'                     means. 
+//' @param Sigma_xi_inv A two dimensional identity `matrix` of prior item
 //'                     parameter VC matrix.
 //'
 //' @return
@@ -204,8 +205,9 @@ Rcpp::List update_ab_NA(unsigned int N, unsigned int J, const arma::mat &Z,
 //' @param bs           A `vector` of item threshold parameters.
 //' @param theta        A `vector` of prior thetas.
 //' @param mu_xi        A two dimensional `vector` of prior item parameter
-//means. ' @param Sigma_xi_inv A two dimensional identity `matrix` of prior '
-//item parameter VC matrix.
+//'                     means. 
+//' @param Sigma_xi_inv A two dimensional identity `matrix` of prior item 
+//'                     parameter VC matrix.
 //'
 //' @return
 //' A `list` of item parameters.
@@ -390,13 +392,13 @@ Rcpp::List update_WKappaZ_NA(const arma::mat &Y, const arma::vec &Ysum,
 //'
 //' Internal function to -2LL
 //'
-//' @param N An `int`, which gives the number of observations.  (> 0)
-//' @param J An `int`, which gives the number of items.  (> 0)
-//' @param Y A N by J `matrix` of item responses.
-//' @param as A `vector` of item discrimination parameters.
-//' @param bs A `vector` of item threshold parameters.
-//' @param gs A `vector` of item lower asymptote parameters.
-//' @param ss A `vector` of item upper asymptote parameters.
+//' @param N     An `int`, which gives the number of observations.  (> 0)
+//' @param J     An `int`, which gives the number of items.  (> 0)
+//' @param Y     A N by J `matrix` of item responses.
+//' @param as    A `vector` of item discrimination parameters.
+//' @param bs    A `vector` of item threshold parameters.
+//' @param gs    A `vector` of item lower asymptote parameters.
+//' @param ss    A `vector` of item upper asymptote parameters.
 //' @param theta A `vector` of prior thetas.
 //'
 //' @return
@@ -594,9 +596,9 @@ arma::uvec Total_Tabulate(unsigned int N, unsigned int J, const arma::mat Y)
 //'             apply(out_t$SS[,-c(1:burnin)],1,sd) )
 //'
 //' OUT = cbind(1:J,OUT)
-//' colnames(OUT) =
-//c('Item','as','bs','gs','ss','as_sd','bs_sd','gs_sd','ss_sd') '
-//print(OUT,digits=3)
+//' colnames(OUT) = c('Item', 'as', 'bs', 'gs', 'ss', 'as_sd', 'bs_sd', 
+//'                   'gs_sd', 'ss_sd')
+//' print(OUT, digits = 3)
 // [[Rcpp::export]]
 Rcpp::List Gibbs_4PNO(const arma::mat &Y, const arma::vec &mu_xi,
                       const arma::mat &Sigma_xi_inv, const double &mu_theta,
@@ -844,14 +846,19 @@ Rcpp::List update_2pno(unsigned int N, unsigned int J, const arma::mat &Y,
 //'                     rep(1,J),rep(1,J),gwg_reps=5,chain_length=burnin*2)
 //'
 //' # Summarizing posterior distribution
-//' OUT =
-//cbind(apply(out_t$AS[,-c(1:burnin)],1,mean),apply(out_t$BS[,-c(1:burnin)],1,mean),
-//' apply(out_t$GS[,-c(1:burnin)],1,mean),apply(out_t$SS[,-c(1:burnin)],1,mean),
-//' apply(out_t$AS[,-c(1:burnin)],1,sd),apply(out_t$BS[,-c(1:burnin)],1,sd), '
-//apply(out_t$GS[,-c(1:burnin)],1,sd),apply(out_t$SS[,-c(1:burnin)],1,sd) ) '
-//OUT = cbind(1:J, OUT) ' colnames(OUT) =
-//c('Item','as','bs','gs','ss','as_sd','bs_sd','gs_sd','ss_sd') ' print(OUT,
-//digits=3)
+//' OUT = cbind(
+//'     apply(out_t$AS[, -c(1:burnin)], 1, mean),
+//'     apply(out_t$BS[, -c(1:burnin)], 1, mean),
+//'     apply(out_t$GS[, -c(1:burnin)], 1, mean),
+//'     apply(out_t$SS[, -c(1:burnin)], 1, mean),
+//'     apply(out_t$AS[, -c(1:burnin)], 1, sd),
+//'     apply(out_t$BS[, -c(1:burnin)], 1, sd),
+//'     apply(out_t$GS[, -c(1:burnin)], 1, sd),
+//'     apply(out_t$SS[, -c(1:burnin)], 1, sd)
+//' )
+//' OUT = cbind(1:J, OUT) 
+//' colnames(OUT) = c('Item','as','bs','gs','ss','as_sd','bs_sd','gs_sd','ss_sd')
+//' print(OUT, digits = 3)
 // [[Rcpp::export]]
 Rcpp::List Gibbs_2PNO(const arma::mat &Y, const arma::vec &mu_xi,
                       const arma::mat &Sigma_xi_inv, const double &mu_theta,
