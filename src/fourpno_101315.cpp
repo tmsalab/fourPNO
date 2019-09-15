@@ -134,7 +134,7 @@ Rcpp::List update_theta(unsigned int N, const arma::mat &Z, const arma::vec &as,
 //' @param bs           A `vector` of item threshold parameters.
 //' @param theta        A `vector` of prior thetas.
 //' @param mu_xi        A two dimensional `vector` of prior item parameter
-//'                     means. 
+//'                     means.
 //' @param Sigma_xi_inv A two dimensional identity `matrix` of prior item
 //'                     parameter VC matrix.
 //'
@@ -205,8 +205,8 @@ Rcpp::List update_ab_NA(unsigned int N, unsigned int J, const arma::mat &Z,
 //' @param bs           A `vector` of item threshold parameters.
 //' @param theta        A `vector` of prior thetas.
 //' @param mu_xi        A two dimensional `vector` of prior item parameter
-//'                     means. 
-//' @param Sigma_xi_inv A two dimensional identity `matrix` of prior item 
+//'                     means.
+//' @param Sigma_xi_inv A two dimensional identity `matrix` of prior item
 //'                     parameter VC matrix.
 //'
 //' @return
@@ -596,7 +596,7 @@ arma::uvec Total_Tabulate(unsigned int N, unsigned int J, const arma::mat Y)
 //'             apply(out_t$SS[,-c(1:burnin)],1,sd) )
 //'
 //' OUT = cbind(1:J,OUT)
-//' colnames(OUT) = c('Item', 'as', 'bs', 'gs', 'ss', 'as_sd', 'bs_sd', 
+//' colnames(OUT) = c('Item', 'as', 'bs', 'gs', 'ss', 'as_sd', 'bs_sd',
 //'                   'gs_sd', 'ss_sd')
 //' print(OUT, digits = 3)
 // [[Rcpp::export]]
@@ -856,8 +856,9 @@ Rcpp::List update_2pno(unsigned int N, unsigned int J, const arma::mat &Y,
 //'     apply(out_t$GS[, -c(1:burnin)], 1, sd),
 //'     apply(out_t$SS[, -c(1:burnin)], 1, sd)
 //' )
-//' OUT = cbind(1:J, OUT) 
-//' colnames(OUT) = c('Item','as','bs','gs','ss','as_sd','bs_sd','gs_sd','ss_sd')
+//' OUT = cbind(1:J, OUT)
+//' colnames(OUT) = c('Item','as','bs','gs','ss','as_sd','bs_sd',
+//'                   'gs_sd','ss_sd')
 //' print(OUT, digits = 3)
 // [[Rcpp::export]]
 Rcpp::List Gibbs_2PNO(const arma::mat &Y, const arma::vec &mu_xi,
