@@ -141,7 +141,7 @@ void update_theta(unsigned int N, const arma::mat &Z, const arma::vec &as,
 //' [Gibbs_4PNO()]
 //'
 //' @noRd
-Rcpp::List update_ab_NA(unsigned int N, unsigned int J, const arma::mat &Z,
+void update_ab_NA(unsigned int N, unsigned int J, const arma::mat &Z,
                         arma::vec &as, arma::vec &bs, const arma::vec &theta,
                         const arma::vec &mu_xi, const arma::mat &Sigma_xi_inv)
 {
@@ -173,18 +173,6 @@ Rcpp::List update_ab_NA(unsigned int N, unsigned int J, const arma::mat &Z,
         bs(j) = R::qnorm(ub, mb_a, sqrt(vb_a), 1, 0);
     }
 
-    return Rcpp::List::create( // Rcpp::Named("XX_xi")=XX_xi,
-                               // Rcpp::Named("XZ")=XZ,
-        //                            Rcpp::Named("as")=as,
-        //                            Rcpp::Named("bs")=bs,
-        Rcpp::Named("pa") = pa //,
-        //                            Rcpp::Named("ua")=ua,
-        //                            Rcpp::Named("ub")=ub,
-        //                            Rcpp::Named("mb_a")=mb_a,
-        //                            Rcpp::Named("vb_a")=vb_a,
-        //                            Rcpp::Named("Sig_xi_star")=Sig_xi_star,
-        //                            Rcpp::Named("mu_xi_star")=mu_xi_star
-    );
 }
 
 //' Update a and b Parameters of 4pno without alpha > 0 Restriction
@@ -657,8 +645,7 @@ Rcpp::List Gibbs_4PNO(const arma::mat &Y, const arma::vec &mu_xi,
 
         // Update a, b; as and bs should be automatically updated here by
         // writing to disk
-        Rcpp::List step2ab =
-            update_ab_NA(N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv);
+        update_ab_NA(N, J, Z, as, bs, theta, mu_xi, Sigma_xi_inv);
         //    Rcpp::List ste2ab =
         //    update_ab_norestriction(N,J,Z,as,bs,theta,mu_xi,Sigma_xi_inv);//I(alpha>0)
         //    removed
