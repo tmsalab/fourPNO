@@ -1,7 +1,7 @@
 Package: fourPNO
 Type: Package
 Title: Bayesian 4 Parameter Item Response Model
-Version: 1.0.6
+Version: 1.1.0
 Authors@R: c(
     person("Steven Andrew", "Culpepper", 
             email = "sculpepp@illinois.edu",
