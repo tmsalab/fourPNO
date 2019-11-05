@@ -13,6 +13,7 @@ Estimate Barton & Lord's (1981) <doi:10.1002/j.2333-8504.1981.tb01255.x>
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://tmsalab.github.io/fourPNO/}
   \item \url{https://github.com/tmsalab/fourPNO}
   \item Report bugs at \url{https://github.com/tmsalab/fourPNO/issues}
 }
