@@ -1,6 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# fourPNO
+
+<!-- badges: start -->
+
 [![Build
 Status](https://travis-ci.org/tmsalab/fourPNO.svg)](https://travis-ci.org/tmsalab/fourPNO)
 [![Package-License](http://img.shields.io/badge/license-GPL%20\(%3E=2\)-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
@@ -14,8 +18,7 @@ Downloads](http://cranlogs.r-pkg.org/badges/fourPNO?color=brightgreen)](http://w
 Downloads](http://cranlogs.r-pkg.org/badges/grand-total/fourPNO?color=brightgreen)](http://www.r-pkg.org/pkg/fourPNO)
 [![Coverage
 status](https://codecov.io/gh/tmsalab/fourPNO/branch/master/graph/badge.svg)](https://codecov.io/github/tmsalab/fourPNO?branch=master)
-
-# `fourPNO` R package
+<!-- badges: end -->
 
 Estimate Barton & Lord’s (1981)
 <https://doi.org/10.1002/j.2333-8504.1981.tb01255.x> four parameter IRT
