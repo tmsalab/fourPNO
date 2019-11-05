@@ -16,8 +16,8 @@ Status](https://cranchecks.info/badges/worst/fourPNO)](https://cran.r-project.or
 Downloads](http://cranlogs.r-pkg.org/badges/fourPNO?color=brightgreen)](http://www.r-pkg.org/pkg/fourPNO)
 [![RStudio CRAN Mirror’s Total
 Downloads](http://cranlogs.r-pkg.org/badges/grand-total/fourPNO?color=brightgreen)](http://www.r-pkg.org/pkg/fourPNO)
-[![Coverage
-status](https://codecov.io/gh/tmsalab/fourPNO/branch/master/graph/badge.svg)](https://codecov.io/github/tmsalab/fourPNO?branch=master)
+[![Codecov test
+coverage](https://codecov.io/gh/tmsalab/fourPNO/branch/master/graph/badge.svg)](https://codecov.io/gh/tmsalab/fourPNO?branch=master)
 <!-- badges: end -->
 
 Estimate Barton & Lord’s (1981)
