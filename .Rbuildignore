@@ -6,3 +6,7 @@
 ^cran-comments\.md$
 ^src/\.clang-format$
 ^CRAN-RELEASE$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^codecov\.yml$
