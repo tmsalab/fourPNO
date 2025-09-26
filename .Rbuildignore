@@ -12,3 +12,4 @@
 ^pkgdown$
 ^codecov\.yml$
 ^\.github$
+^data-raw$
