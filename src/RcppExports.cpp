@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // rmvnorm
 arma::mat rmvnorm(unsigned int n, const arma::vec& mu, const arma::mat& sigma);
 RcppExport SEXP _fourPNO_rmvnorm(SEXP nSEXP, SEXP muSEXP, SEXP sigmaSEXP) {
