@@ -1,11 +1,22 @@
 ## Test environments
-* local OS X install, R 3.6.1
-* ubuntu 14.04 (on travis-ci), R 3.6.1
-* win-builder (devel and release)
+
+- local macOS 26 Tahoe install, R 4.5.1
+- ubuntu 24.04 (on github actions), R 4.5.1
+- win-builder (devel and release)
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
+
+We are making this release to account for the RcppArmadillo change that
+requires removing `CXX_STD=CXX11`. However, we are not able to opt-in to 
+Armadillo 15.0.2 because we still have a deprecation warning associated with
+`hist()` inside of our package. Details:
+
+<https://gitlab.com/conradsnicta/armadillo-code/-/issues/284>
+
+Once the version is bumped to Armadillo 15.0.3,
+there will be no deprecation warning triggered.
 
 We have one note related to spelling:
 
