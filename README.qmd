@@ -1,8 +1,8 @@
 ---
-output: github_document
+format: gfm
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
@@ -15,13 +15,12 @@ knitr::opts_chunk$set(
 # fourPNO
 
 <!-- badges: start -->
-[![Build Status](https://travis-ci.org/tmsalab/fourPNO.svg)](https://travis-ci.org/tmsalab/fourPNO)
+[![R-CMD-check](https://github.com/tmsalab/fourPNO/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tmsalab/fourPNO/actions/workflows/R-CMD-check.yaml)
 [![Package-License](http://img.shields.io/badge/license-GPL%20(%3E=2)-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 [![CRAN Version Badge](http://www.r-pkg.org/badges/version/fourPNO)](https://cran.r-project.org/package=fourPNO)
 [![CRAN Status](https://cranchecks.info/badges/worst/fourPNO)](https://cran.r-project.org/web/checks/check_results_fourPNO.html)
-[![RStudio CRAN Mirror's Monthly Downloads](http://cranlogs.r-pkg.org/badges/fourPNO?color=brightgreen)](http://www.r-pkg.org/pkg/fourPNO)
-[![RStudio CRAN Mirror's Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/fourPNO?color=brightgreen)](http://www.r-pkg.org/pkg/fourPNO)
-[![Codecov test coverage](https://codecov.io/gh/tmsalab/fourPNO/branch/master/graph/badge.svg)](https://codecov.io/gh/tmsalab/fourPNO?branch=master)
+[![RStudio CRAN Mirror's Monthly Downloads](http://cranlogs.r-pkg.org/badges/fourPNO?color=brightgreen)](https://www.r-pkg.org:443/pkg/fourPNO)
+[![RStudio CRAN Mirror's Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/fourPNO?color=brightgreen)](https://www.r-pkg.org:443/pkg/fourPNO)
 <!-- badges: end -->
 
 Estimate Barton & Lord's (1981) <https://doi.org/10.1002/j.2333-8504.1981.tb01255.x> 
@@ -32,13 +31,17 @@ formulation described by Culpepper (2016) <https://doi.org/10.1007/s11336-015-94
 
 You can install `fourPNO` from CRAN using:
 
-```{r cran-installation, eval = FALSE}
+```{r}
+#| label: cran-installation
+#| eval: false
 install.packages("fourPNO")
 ```
 
 Or, you can be on the cutting-edge development version on GitHub using:
 
-```{r gh-installation, eval = FALSE}
+```{r}
+#| label: gh-installation
+#| eval: false
 if(!requireNamespace("devtools")) install.packages("devtools")
 devtools::install_github("tmsalab/fourPNO")
 ```
@@ -47,7 +50,9 @@ devtools::install_github("tmsalab/fourPNO")
 
 To use the `fourPNO` package, load it into _R_ using:
 
-```{r example, message = FALSE}
+```{r}
+#| label: example
+#| message: false
 library("fourPNO")
 ```
 
@@ -66,7 +71,9 @@ To ensure future development of the package, please cite `fourPNO`
 package if used during an analysis or simulation study. Citation information
 for the package may be acquired by using in *R*:
 
-```{r citation-info, eval = FALSE}
+```{r}
+#| label: citation-info
+#| eval: false
 citation("fourPNO")
 ```
 

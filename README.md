@@ -1,23 +1,21 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
 # fourPNO
 
 <!-- badges: start -->
 
-[![Build
-Status](https://travis-ci.org/tmsalab/fourPNO.svg)](https://travis-ci.org/tmsalab/fourPNO)
-[![Package-License](http://img.shields.io/badge/license-GPL%20\(%3E=2\)-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
+[![R-CMD-check](https://github.com/tmsalab/fourPNO/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tmsalab/fourPNO/actions/workflows/R-CMD-check.yaml)
+[![Package-License](http://img.shields.io/badge/license-GPL%20(%3E=2)-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-2.0.html)
 [![CRAN Version
-Badge](http://www.r-pkg.org/badges/version/fourPNO)](https://cran.r-project.org/package=fourPNO)
+Badge](http://www.r-pkg.org/badges/version/fourPNO.png)](https://cran.r-project.org/package=fourPNO)
 [![CRAN
-Status](https://cranchecks.info/badges/worst/fourPNO)](https://cran.r-project.org/web/checks/check_results_fourPNO.html)
+Status](https://cranchecks.info/badges/worst/fourPNO.png)](https://cran.r-project.org/web/checks/check_results_fourPNO.html)
 [![RStudio CRAN Mirror’s Monthly
-Downloads](http://cranlogs.r-pkg.org/badges/fourPNO?color=brightgreen)](http://www.r-pkg.org/pkg/fourPNO)
+Downloads](http://cranlogs.r-pkg.org/badges/fourPNO?color=brightgreen.png)](https://www.r-pkg.org:443/pkg/fourPNO)
 [![RStudio CRAN Mirror’s Total
-Downloads](http://cranlogs.r-pkg.org/badges/grand-total/fourPNO?color=brightgreen)](http://www.r-pkg.org/pkg/fourPNO)
-[![Codecov test
-coverage](https://codecov.io/gh/tmsalab/fourPNO/branch/master/graph/badge.svg)](https://codecov.io/gh/tmsalab/fourPNO?branch=master)
+Downloads](http://cranlogs.r-pkg.org/badges/grand-total/fourPNO?color=brightgreen.png)](https://www.r-pkg.org:443/pkg/fourPNO)
 <!-- badges: end -->
 
 Estimate Barton & Lord’s (1981)
@@ -51,8 +49,8 @@ library("fourPNO")
 
 Inside the package, the estimation routines can be viewed as:
 
-  - `Gibbs_2PNO()`
-  - `Gibbs_4PNO()`
+- `Gibbs_2PNO()`
+- `Gibbs_4PNO()`
 
 ## Author
 
