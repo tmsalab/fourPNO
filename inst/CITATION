@@ -1,6 +1,6 @@
 citHeader("To cite the package 'fourPNO' in publications use:")
 
-bibentry(entry = "Manual",
+bibentry(bibtype = "Manual",
          title        = "{fourPNO: Bayesian 4 Parameter Item Response Model}",
          author       = c(as.person("Steven Andrew Culpepper")
                                   ),
@@ -10,7 +10,7 @@ bibentry(entry = "Manual",
                               "URL https://cran.r-project.org/package=fourPNO.")
 )
 
-bibentry(entry  = "Article",
+bibentry(bibtype  = "Article",
          title  = "Revisiting the 4-Parameter Item Response Model: Bayesian Estimation and Application",
          author = c(as.person("Steven Andrew Culpepper")),
          journal= "Psychometrika",
