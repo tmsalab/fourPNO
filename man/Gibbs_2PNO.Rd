@@ -4,8 +4,15 @@
 \alias{Gibbs_2PNO}
 \title{Gibbs Implementation of 2PNO}
 \usage{
-Gibbs_2PNO(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, burnin,
-  chain_length = 10000L)
+Gibbs_2PNO(
+  Y,
+  mu_xi,
+  Sigma_xi_inv,
+  mu_theta,
+  Sigma_theta_inv,
+  burnin,
+  chain_length = 10000L
+)
 }
 \arguments{
 \item{Y}{A N by J \code{matrix} of item responses.}
