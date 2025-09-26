@@ -2,7 +2,7 @@ citHeader("To cite the package 'fourPNO' in publications use:")
 
 citEntry(entry = "Manual",
          title        = "{fourPNO: Bayesian 4 Parameter Item Response Model}",
-         author       = personList(as.person("Steven Andrew Culpepper")
+         author       = c(as.person("Steven Andrew Culpepper")
                                   ),
          year         = 2019,
          textVersion  = paste("Culpepper, S.A. (2019)",
