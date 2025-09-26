@@ -2,7 +2,7 @@
 
 ## Documentation
 
-- Added a `pkgdown` website that deploys to <http://tmsalab.github.io/fourPNO>.
+- Added a `pkgdown` website that deploys to <https://tmsalab.github.io/fourPNO/>.
 
 # fourPNO 1.1.0
 
