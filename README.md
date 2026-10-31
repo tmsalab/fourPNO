@@ -2,7 +2,7 @@
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
-# fourPNO
+# fourPNO <a href="https://tmsalab.github.io/fourPNO/"><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/fourPNO-logo-animated-dark.svg"><img src="man/figures/fourPNO-logo-animated-light.svg" width="150" align="right" alt="A hexagonal logo for fourPNO: an S-shaped item response curve splits the hex above a solid ink form with the word fourPNO across its rise, inside an orange posterior band, with thin lines labelled g, 1 − s, a and b/a for its floor, ceiling, slope at the inflection and location."/></picture></a>
 
 <!-- badges: start -->
 
