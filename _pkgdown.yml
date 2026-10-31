@@ -1,5 +1,11 @@
+url: https://tmsalab.github.io/fourPNO/
+
 template:
   params:
     bootswatch: cerulean
     ganalytics: UA-151562227-1
     bootstrap: 5
+  opengraph:
+    image:
+      src: man/figures/fourPNO-logo-static-light.svg
+      alt: The fourPNO hex logo, a four-parameter ogive in its orange posterior band, with lines for g, 1 − s, a and b/a.
