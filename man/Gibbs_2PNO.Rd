@@ -15,7 +15,8 @@ Gibbs_2PNO(
 )
 }
 \arguments{
-\item{Y}{A N by J \code{matrix} of item responses.}
+\item{Y}{A N by J \code{matrix} of item responses. Missing
+values are not allowed.}
 
 \item{mu_xi}{A two dimensional \code{vector} of prior item parameter
 means.}
