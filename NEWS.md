@@ -1,3 +1,23 @@
+# fourPNO (development version)
+
+## Changes
+
+- Raised the minimum version of every dependency to its latest CRAN
+  release, including Rcpp (>= 1.1.2) and RcppArmadillo (>= 15.6.2-1).
+
+## Bug fixes
+
+- `Gibbs_4PNO()` and `Gibbs_2PNO()` now fill `EAPtheta`, `HistS` and `Ds`
+  when `burnin = 0`. Previously the comparison `t > burnin - 1` wrapped
+  around on an unsigned integer, so all three were returned as zeros.
+- `Gibbs_4PNO()` and `Gibbs_2PNO()` now stop with an error when `Y`
+  contains missing values. Previously a single `NA` produced an invalid fit
+  without warning.
+
+## Internal
+
+- Added a testthat test suite.
+
 # fourPNO 1.1.0.900
 
 ## Documentation

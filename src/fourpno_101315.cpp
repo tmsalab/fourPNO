@@ -502,7 +502,8 @@ arma::uvec Total_Tabulate(unsigned int N, unsigned int J, const arma::mat Y)
 //'
 //' Internal function to -2LL
 //'
-//' @param Y               A N by J `matrix` of item responses.
+//' @param Y               A N by J `matrix` of item responses. Missing
+//'                        values are not allowed.
 //' @param mu_xi           A two dimensional `vector` of prior item parameter
 //'                        means.
 //' @param Sigma_xi_inv    A two dimensional identity `matrix` of prior item
@@ -587,6 +588,9 @@ Rcpp::List Gibbs_4PNO(const arma::mat &Y, const arma::vec &mu_xi,
                       const arma::vec &sTF, unsigned int gwg_reps,
                       unsigned int chain_length = 10000)
 {
+    if (Y.has_nan()) {
+        Rcpp::stop("`Y` must not contain missing values.");
+    }
 
     // arma::vec theta,arma::vec as,arma::vec bs,
     unsigned int N = Y.n_rows;
@@ -660,7 +664,7 @@ Rcpp::List Gibbs_4PNO(const arma::mat &Y, const arma::vec &mu_xi,
         SSS.col(t) = ss;
 
         // /*
-        if (t > burnin - 1) {
+        if (t >= burnin) {
             tmburn = t - burnin;
             // Compute EAPs here
             EAPtheta = (tmburn * EAPtheta + theta) / (tmburn + 1.0);
@@ -774,7 +778,8 @@ Rcpp::List update_2pno(unsigned int N, unsigned int J, const arma::mat &Y,
 //'
 //' Implement Gibbs 2PNO Sampler
 //'
-//' @param Y                A N by J `matrix` of item responses.
+//' @param Y                A N by J `matrix` of item responses. Missing
+//'                         values are not allowed.
 //' @param mu_xi            A two dimensional `vector` of prior item parameter
 //'                         means.
 //' @param Sigma_xi_inv     A two dimensional identity `matrix` of prior item
@@ -841,6 +846,9 @@ Rcpp::List Gibbs_2PNO(const arma::mat &Y, const arma::vec &mu_xi,
                       const double &Sigma_theta_inv, unsigned int burnin,
                       unsigned int chain_length = 10000)
 {
+    if (Y.has_nan()) {
+        Rcpp::stop("`Y` must not contain missing values.");
+    }
 
     // arma::vec theta,arma::vec as,arma::vec bs,
     unsigned int N = Y.n_rows;
@@ -899,7 +907,7 @@ Rcpp::List Gibbs_2PNO(const arma::mat &Y, const arma::vec &mu_xi,
         AS.col(t) = as;
         BS.col(t) = bs;
 
-        if (t > burnin - 1) {
+        if (t >= burnin) {
             tmburn = t - burnin;
             // Compute EAPs here
             EAPtheta = (tmburn * EAPtheta + theta) / (tmburn + 1.0);

@@ -1,7 +1,7 @@
 Package: fourPNO
 Type: Package
 Title: Bayesian 4 Parameter Item Response Model
-Version: 1.1.1
+Version: 1.1.1.9000
 Authors@R: c(
     person("Steven Andrew", "Culpepper", 
             email = "sculpepp@illinois.edu",
@@ -21,10 +21,12 @@ URL: https://tmsalab.github.io/fourPNO/, https://github.com/tmsalab/fourPNO
 BugReports: https://github.com/tmsalab/fourPNO/issues
 License: GPL (>= 2)
 Depends: R (>= 4.3.0)
-Imports: Rcpp (>= 1.1.0)
-LinkingTo: Rcpp, RcppArmadillo (>= 15.0.2-1)
+Imports: Rcpp (>= 1.1.2)
+LinkingTo: Rcpp (>= 1.1.2), RcppArmadillo (>= 15.6.2-1)
 RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
 Suggests: 
-    covr
+    covr (>= 3.6.5),
+    testthat (>= 3.3.2)
+Config/testthat/edition: 3

@@ -265,7 +265,8 @@ Total_Tabulate <- function(N, J, Y) {
 #'
 #' Internal function to -2LL
 #'
-#' @param Y               A N by J `matrix` of item responses.
+#' @param Y               A N by J `matrix` of item responses. Missing
+#'                        values are not allowed.
 #' @param mu_xi           A two dimensional `vector` of prior item parameter
 #'                        means.
 #' @param Sigma_xi_inv    A two dimensional identity `matrix` of prior item
@@ -349,7 +350,8 @@ Gibbs_4PNO <- function(Y, mu_xi, Sigma_xi_inv, mu_theta, Sigma_theta_inv, alpha_
 #'
 #' Implement Gibbs 2PNO Sampler
 #'
-#' @param Y                A N by J `matrix` of item responses.
+#' @param Y                A N by J `matrix` of item responses. Missing
+#'                         values are not allowed.
 #' @param mu_xi            A two dimensional `vector` of prior item parameter
 #'                         means.
 #' @param Sigma_xi_inv     A two dimensional identity `matrix` of prior item
